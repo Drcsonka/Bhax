@@ -1,0 +1,132 @@
+<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xi="http://www.w3.org/2001/XInclude" version="5.0" xml:lang="hu">
+    <info>
+        <title>Helló, Welch!</title>
+        <keywordset>
+            <keyword/>
+        </keywordset>
+    </info>
+    <section>
+        <title>Első osztályom</title>
+        <para>
+            Valósítsd meg C++-ban és Java-ban az módosított polártranszformációs algoritmust! A matek háttér 
+            teljesen irreleváns, csak annyiban érdekes, hogy az algoritmus egy számítása során két normálist
+            számol ki, az egyiket elspájzolod és egy további logikai taggal az osztályban jelzed, hogy van vagy
+            nincs eltéve kiszámolt szám.
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása:   https://github.com/Drcsonka/Prog1/blob/master/polargen.cpp
+             		https://github.com/Drcsonka/Prog1/blob/master/polargenerator.java
+        </para>
+        <para>
+            Tanulságok, tapasztalatok, magyarázat... térj ki arra is, hogy a JDK forrásaiban a Sun programozói
+            pont úgy csinálták meg ahogyan te is, azaz az OO nemhogy nem nehéz, hanem éppen természetes neked!
+
+		A C++ és Java nyelvek mind objektumorientált programozási nyelvek. Az objektumok 			segítségével csökkenti a programok bonyolultságának a programozók számára.
+		Az algoritmus matematikai háttere minket nem foglalkoztat jelenleg. A számítás két véletlenszerűe normálizált számot állít elő. Minden páratlan meghíváskor nem kell számolnunk, hanem csak elég az előző lépésben generált másik számot megadni. Ezt egy függvény segítségével tároljuk el, hogy páratlan-e.
+        </para>                
+    </section>        
+
+    <section>
+        <title>LZW</title>
+        <para>
+            Valósítsd meg C-ben az LZW algoritmus fa-építését!
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása:     https://github.com/Drcsonka/Prog1/blob/master/lzw.c           
+        </para>
+	<para>
+		Ezzel a feladattal már foglalkoztunk Bev. Prog. órán.
+		A program lényege, hogy a bemeneti fájl tartalmát átalakítja és kiírja a bináris 			fáját egy külön fájlba.
+		A fa építés elve, hogy amikor a programunk kap egy 1-est vagy 0-ást megnézi, hogy az aktuális csomópont tartalmazza-e azt az elemet. Ha nem betesszük a jelenlegi csomópont gyermekeként. Amennyiben viszont igen akkor csinálunk egy új csomópontot és annak lesz a gyermeke.
+	</para>
+    </section>        
+        
+    <section>
+        <title>Fabejárás</title>
+        <para>
+            Járd be az előző (inorder bejárású) fát pre- és posztorder is!
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása:  https://github.com/Drcsonka/Prog1/blob/master/lzwpost.c
+              https://github.com/Drcsonka/Prog1/blob/master/lzwpre.c
+        </para>
+	<para>
+
+		A fabejárás előtt megnézzük, hogy a bejárandó fa üres-e.
+		Preorder bejárásnál elhelyezzük a gyökérelemet a sor végére.
+		Majd először a gyökérelem bal oldali részfáját, ezután a jobb oldali részfáját 			járjuk be. 
+
+	</para>
+	<para>
+		Postorder a Preorder ellentéte, ilyenkor először a gyökérelem bal oldali 			részfáját, majd a jobb oldali részfáját járjuk be, és csak ezután dolgozzuk fel a 			gyökérelemet.
+
+	</para>
+    </section>        
+                        
+    <section>
+        <title>Tag a gyökér</title>
+        <para>
+            Az LZW algoritmust ültesd át egy C++ osztályba, legyen egy Tree és egy beágyazott Node
+            osztálya. A gyökér csomópont legyen kompozícióban a fával!
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása:     https://github.com/Drcsonka/Prog1/blob/master/z3a7.cpp           
+        </para>
+	<para>
+	Ebben a feladatban megint az eddig használt LZW binfa programot fogjuk használni.
+Ebben az osztályban nem a fa gyökere a mutató, hanem csak egy objektum, a fa lesz ebben az esetben a mutató, ami mindig az épülő fa jelenlegi csomópontjára fog mutatni. 
+  Ha a programunk 0-at kap, akkor megnézzük, hogy az jelenlegi csomópontunknak van e 0-ás gyermeke. Ha nincs, akkor új csomópontot hozunk étre. Ezután az aktuális csomópont nullás gyermekét ráallítjuk az új csomópontra és a fával visszaállunk a gyökérre.Ha viszont van nullás gyerkmek, akkor a fa mutatóját állítjuk rá. Ha 1-est kapunk akkor is ugyan ez történik.
+	</para>
+    </section>        
+                
+    <section>
+        <title>Mutató a gyökér</title>
+        <para>
+            Írd át az előző forrást, hogy a gyökér csomópont ne kompozícióban, csak aggregációban legyen a 
+            fával!
+        </para>
+        <para>
+            Megoldás videó: 
+        </para>
+        <para>
+            Megoldás forrása:  https://github.com/Drcsonka/Prog1/blob/master/z3a72.cpp
+        </para>
+<para>
+
+
+	Az előző feladathoz képest az fog most különbözni, hogy most a gyökér is mutató lesz.
+	Most mindenhol, ahol eddig a gyökeret referenciaként adtuk át a mutatónak, most enélkül fogjuk. Helyet foglalunk a memóriában és erre állítjuk rá a fát.
+	</para>
+    </section>                     
+
+    <section>
+        <title>Mozgató szemantika</title>
+        <para>
+            Írj az előző programhoz mozgató konstruktort és értékadást, a mozgató konstruktor legyen a mozgató
+            értékadásra alapozva!
+        </para>
+        <para>
+            Megoldás videó: 
+        </para>
+        <para>
+            Megoldás forrása:  https://github.com/Drcsonka/Prog1/blob/master/z3a73.cpp
+        </para>
+
+	<para>     
+
+	</para>
+    </section>                     
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+</chapter>                

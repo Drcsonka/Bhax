@@ -1,0 +1,112 @@
+<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xi="http://www.w3.org/2001/XInclude" version="5.0" xml:lang="hu">
+    <info>
+        <title>Helló, Caesar!</title>
+        <keywordset>
+            <keyword/>
+        </keywordset>
+    </info>
+    <section>
+        <title><type>int ***</type> háromszögmátrix</title>
+        <para>
+           
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása: https://github.com/Drcsonka/Prog1/blob/master/haromszog.c               
+        </para>
+        <para>
+	    A mátrix n darab oszlopból és m darab sorból álló táblázatok. Egy mátrix akkor  	        háromszögmátrix, ha a főátlója alatt vagy felett csak 0 található.
+            A "malloc" függvénnyel memóriát foglalunk le, mi adjuk meg mekkora ez a terület.
+	    Ez után vagy a lefoglalt memória kezdőcímét vagy NULL értéket ad vissza.
+	    Egy for ciklussal végigmegyunk a lefoglalt teruleten és minden double tipusú teruletre állítunk egy mutatót, majd ezek a mutatók alkotják a háromszögmátrixot.
+            A "free" függvénnyel felszabadítjuk a lefoglalt memóriát.
+
+        </para>            
+    </section>        
+    <section>
+        <title>C EXOR titkosító</title>
+        <para>
+            Írj egy EXOR titkosítót C-ben!
+        </para>
+        <para>
+            Megololdás videó:
+        </para>
+        <para>
+            Megoldás forrása:  https://github.com/Drcsonka/Prog1/blob/master/exor_titkosito_c.c              
+        </para>
+        <para>
+            A kizáró vagyok titkosítást fogjuk használni. Ez a művelet amikor egymáshoz 
+	    hasonlítjuk a szöveg bájtját és a titkósító kulcs bájtjait akkor 1-et ad vissza
+	    ha a kettó különböző és 0-t ha megegyeznek.
+	    A program elején megadjuk a titkosítani szánt szöveg méretét, ez alapján a program
+	    generál egy megfelelő méretű kulcsot. Ezután a kettő összehasonlításával megalkotja a titkosított szöveget.
+
+
+        </para>            
+    </section>        
+    <section>
+        <title>Java EXOR titkosító</title>
+        <para>
+            Írj egy EXOR titkosítót Java-ban!
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása:https://github.com/Drcsonka/Prog1/blob/master/ExorTitkosito.class
+https://github.com/Drcsonka/Prog1/blob/master/ExorTitkosito.java                
+        </para>
+        <para>
+            Ez a feladat az előző Exor titkosítás csak Java programozási nyelven.
+        </para>            
+    </section>        
+    <section>
+        <title>C EXOR törő</title>
+        <para>
+            Írj egy olyan C programot, amely megtöri az első feladatban előállított titkos szövegeket!
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása: https://github.com/Drcsonka/Prog1/blob/master/exor_toro_c.c               
+        </para>
+        <para>
+            Ez a program az előbb létrehozott titkosítóra épül. A titkosított fájl-t összeveti a kulcsal és így visszakapjuk az eredeti szöveget.
+        </para>            
+    </section>        
+    <section>
+        <title>Neurális OR, AND és EXOR kapu</title>
+        <para>
+            R
+        </para>
+        <para>
+            Megoldás videó: <link xlink:href="https://youtu.be/Koyw6IH5ScQ">https://youtu.be/Koyw6IH5ScQ</link>
+        </para>
+        <para>
+            Megoldás forrása: <link xlink:href="https://gitlab.com/nbatfai/bhax/tree/master/attention_raising/NN_R">https://gitlab.com/nbatfai/bhax/tree/master/attention_raising/NN_R</link>               
+        </para>
+        <para>
+            Tanulságok, tapasztalatok, magyarázat...
+        </para>            
+    </section>        
+    <section>
+        <title>Hiba-visszaterjesztéses perceptron</title>
+        <para>
+            C++
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása:     https://github.com/Drcsonka/Prog1/blob/master/main.cpp           
+        </para>
+        <para>
+            A Mandelbrot feladatból kapott képet használjuk fel bemenetként. Végigmegyünk a képen, megnézzük a magasságát és szélességét, és eltároljuk az ebből kapott piros színt (RGB színkódból az R(red)-t). Az ezt kapott pirost berakjuk a perceptron 3. rétegébe. 
+        </para>            
+    </section>        
+        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+</chapter>                

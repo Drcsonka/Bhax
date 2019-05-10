@@ -1,0 +1,131 @@
+<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xi="http://www.w3.org/2001/XInclude" version="5.0" xml:lang="hu">
+    <info>
+        <title>Helló, Conway!</title>
+        <keywordset>
+            <keyword/>
+        </keywordset>
+    </info>
+    <section>
+        <title>Hangyaszimulációk</title>
+        <para>
+            Írj Qt C++-ban egy hangyaszimulációs programot, a forrásaidról utólag reverse engineering jelleggel
+            készíts UML osztálydiagramot is!
+        </para>
+        <para>
+            Megoldás videó: <link xlink:href="https://bhaxor.blog.hu/2018/10/10/myrmecologist">https://bhaxor.blog.hu/2018/10/10/myrmecologist</link>
+        </para>
+        <para>
+            Megoldás forrása: <link xlink:href="https://github.com/Drcsonka/Prog1/tree/master/hangyaszimulacioé"></link>               
+        </para>
+        <para>
+
+            Tanulságok, tapasztalatok, magyarázat...
+        </para>   
+
+     <para>
+         Az Ant.h header fájlban a hangyák tulajdonságai vannak deklarálva. Az 'x' és 'y' változók a koordinátái, hogy hol vannak éppen, a 'dir' változó pedig azt mutatja, hogy milyen irányba tart éppen.
+     </para>
+     <para>
+         Az AntWin.h header-ben az ablak magassága és szélessége van megadva pixelekben ez publikus részben van megadva. A 'cellwidth' és 'cellheight' változók pedig a cellák szélességét és magasságát adják meg amiben a hangyák vannak megjelenitve ez privát részben vannak deklarálva. A 'grids' a két rácsot adja meg, a 'gridldx' pedig a két rácspont közül az egyiket tárolja.
+	</para>
+	<para>
+          A 'closeEvent()' függvény meghívja az AntThread.h header-ből a 'finish()' methodust ami leállítja a programot ha hamis értéket kap.
+	 </para>
+	 <para> 
+          A 'keyPressEvent()' függvény a gomb lenyomásokat dolgozza fel.
+	 </para>
+	 <para>	
+	  A 'paintEvent()' függvénnyel pedig megváltoztatjuk a hangyák színét.
+     </para>
+     <para>
+         Az 'AntThread' osztály nagyon hasonló az 'AntWinhez' csak kiegészítve újabb tulajdontságokkal. Ezek például az 'evaporation' ami a párolgás mértékét tárolja el.
+Az 'nbrPheromone' ami a feromonok számát. A 'cellAntMax' a hangyák maximális előfordulását egy cellán belül.
+     </para>         
+    </section>        
+    <section>
+        <title>Java életjáték</title>
+        <para>
+            Írd meg Java-ban a John Horton Conway-féle életjátékot, 
+            valósítsa meg a sikló-kilövőt!
+        </para>
+        <para>
+            Megoldás videó: 
+        </para>
+        <para>
+            Megoldás forrása: <link xlink:href="https://github.com/Drcsonka/Prog1/blob/master/Sejtautomata.java"></link>               
+        </para>
+        <para>
+            Tanulságok, tapasztalatok, magyarázat...
+        </para>            
+	<para>
+		A program alap helyzetben üres rácsokkal van tele. Kiinduláskor létrehozunk egy 	általunk kitalált alakzatot, és ebből fog elindulni a játék. Az alakzat rácsai élő sejtek 	  lesznek, a többi cella halott sejtek. Egy sejtet 8 cella vesz körül. Ahhoz, hogy egy élő 	 sejt tovább éljen legalább 2 vagy 3 szomszédos élő sejtjének kell lennie. Egy halott sejt 	  akkor kel életre, ha 3 vagy több közvetlen mellette lévő sejt elő. Két rácsot használunk, 		az egyik a  sejttér jelenlegi állapota, a másik a sejttér megváltozott állapota. Ezek az 		'időFejlődés()' függvényben vannak. Itt figyeljük, hogy a sejtek hogyan változnak.
+	</para>	
+	<para>
+	A 'szomszedokSzama()' függvényben megnézzük, hogy a sejteknek mennyi szomszéda van, és ez 	  alapján, hogy mi fog történni vele.
+	Definiáljuk, hogy hány cella magasa és széles legyen a sejtterünk és, hogy a cellának 		mekkora legyen a mérete. Hogy mennyi legyen a setterek közötti váltakozás ideje.
+	</para>
+	<para>
+	A paint() függvény kirajzolja számunkra a sejtteret és az azon lévő sejteket.
+	Az egybe ágyazott for ciklusból a külső felel a sejttér soraiért a belső az oszlopaiért.
+	Az élő sejteket feketével a halottakat viszont fehérrel rajzolja ki a program számunkra.
+	</para>
+	<para>
+	Gombokkal tudjuk a játék menetet valamilyen szinten változtatni.
+	Az 'S' betű lenyomásával pillanatképet tudunk csinálni amit számolunk is, hogy hány készült.
+	A szimuláció sebességét is tudjuk változtatni a 'g' és az 'l' billentyűkkel. A 'g'-vel gyorístjuk az 'l'-el lassítjuk a rácsok váltakozása közötti időközt.
+	A cella méreteit a 'K' és az 'N' billenytűvel tudjuk változtatni. A 'K' betűvel felezzük az 'N'-el duplázzuk a sejtek méreteit.
+	Az egerérre is reagál a program. Ha rávisszük az egerünket egy cellára akkor az elővé változik, ha viszont lenyomjuk a klikket akkor a cella jelenlegi állapotának az ellenkezőjére változik.
+	</para>
+
+
+
+
+
+    </section>        
+    <section>
+        <title>Qt C++ életjáték</title>
+        <para>
+            Most Qt C++-ban!
+        </para>
+        <para>
+            Megoldás videó: 
+        </para>
+        <para>
+            Megoldás forrása: <link xlink:href="https://github.com/Drcsonka/Prog1/tree/master/sejtautomata_cpp"></link>               
+        </para>
+        <para>
+	Ez a feladat ugyan az a program lesz mint az előző feladatban csinált életjáték, csak ebben az esetben c++-ban QT keretrendszer segítségével.
+        </para>
+	<para>
+	A 'sejtablak.h' header fájlban deklaráljuk a program alapját.
+	A sejttér magasságát ('magassag') és szélességét ('szelesseg') vagyis a nagyságát.
+	A 'cellaSzelesseg' és a 'cellaMagassag' a cella adatait adják meg pixelben.
+	A két rácsot is itt deklaráljuk ami a sejttér két időállapotot fogják tartalmazni.
+	Ezen felül még azt is, hogy a sejt él-e vagy sem.
+	</para>
+	<para>
+	A 'sejtszal.cpp' file-ban több függvényt is deklarálunk. Az egyik a 'szomszedokSzama()' függvény amiben végignézzük a sejtnek a szomszédait. A másik az 'idoFejlodes()' függvény amiben azt határozzuk meg, hogy a sejtünk túl fogja-e élni ezt az időállapotot, vagy sem. Akkor éli túl az élő sejt ha 2 vagy 3 élő szomszédja van, amúgy meghal. A halott sejt viszont marad halott, hacsak nincs 3 élő szomszédja, mert akkor az is élő lesz.	
+	</para>
+	<para>
+	A 'sejtablak.cpp' fájlban a 'paintEvent()' függvényt deklaráljuk ami az aktuális rácsot rajzolja ki. 2 'for' ciklus rajzolja ki a sejtcellát, a belső 'for' ciklus az oszlopokat, a külső a sorokat. Ezaltal minden sejtet kirajzolnak a megfelelő pontokra.
+	</para>
+    </section>        
+    <section>
+        <title>BrainB Benchmark</title>
+        <para>
+        </para>
+        <para>
+            Megoldás videó: 
+        </para>
+        <para>
+            Megoldás forrása: <link xlink:href="https://github.com/Drcsonka/Prog1/tree/master/brainH	"></link>               
+        </para>
+	<para>
+            Ezt a programot arra a célra fejlesztettékm hogy az esportolókat teszteljék mennyire tudják követni a karakterük mozgását zavarosabb helyzetekben.
+	</para>
+	<para>
+A program alapja, hogy a karakterünket vagyis egy pontot kell követnünk az egerünkel, és ha egy másodpercnél tovább nem tartozkodik az egerünk a dobozban akkor, a program annak veszi, hogy elvesztettük a dobozt és lassul a doboz mozgása. A játék során egyre több doboz fog megjelenni a képernyőn ezzel nehezítve a 'karakterünk' követését.
+       </para>          
+    </section>        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+</chapter>                

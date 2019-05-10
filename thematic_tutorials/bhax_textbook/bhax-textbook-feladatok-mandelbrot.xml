@@ -1,0 +1,120 @@
+<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xi="http://www.w3.org/2001/XInclude" version="5.0" xml:lang="hu">
+    <info>
+        <title>Helló, Mandelbrot!</title>
+        <keywordset>
+            <keyword/>
+        </keywordset>
+    </info>
+    <section>
+        <title>A Mandelbrot halmaz</title>
+        <para>
+                
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása:  https://github.com/Drcsonka/Prog1/blob/master/mandel.cpp              
+        </para>
+	<para>
+		Benoit Mandelbrot matematikus találta meg ezt a komplex számsíkot és róla lett elnevezve.
+            A program futtatásával fogjuk elkészíteni a Mandelbrot-halmaz kétdimenziós, számítógépes ábráját.
+	    Meghatározzuk a szükséges adatokat a számításhoz: magasság, szélesség, iterációs határérték.
+            "For" ciklusokkal megyünk végig a szelessegen, magassagon és kiszámítjuk az adott  csomóponthoz tartozó komplex számot.
+	     Eközben egy while ciklussal az iteráció értékét számoljuk, és ha ez eléri a határt akkor a szám eleme a Mandelbrot-halmaznak. 
+            
+</para>
+<para>
+Futtatasa:g++ mandelpngt.c++ -lpng16  -o mandelpngtki
+./mandelpngtki t.png
+</para>
+	
+    </section>        
+        
+    <section>
+        <title>A Mandelbrot halmaz a <filename>std::complex</filename> osztállyal</title>
+        <para>
+                
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása: https://github.com/Drcsonka/Prog1/blob/master/3.1.2.cpp               
+        </para>
+	<para>
+		Az elozo feladatban a komplex számokat két változóban tároltuk egyben a valós, másikban a képzetes részét, viszont az std::complex osztállyal megtehetjuk azt, hogy egy változóban tárolhassuk.
+	</para> 
+	<para>
+	        A while ciklussal azt nézzük meg, hogy mennyire távolodik el z_n a z_0 ponttól vagyis a koordinátarendszer közepétől. Ha ez a távolság nagyobb mint 2, akkor a vizsgált pontban az iteráció nem sűrüsodik be az origohoz kozeli pontban.
+		Ha az elérjük az iterációs határt es emiatt lépünk ki a while ciklusból, akkor ezt a pontot feketére szinezzük, és a Mandelbrot-halmaz elemének tekintjük. 
+	
+</para>
+    </section>        
+                
+    <section>
+        <title>Biomorfok</title>
+        <para>
+        </para>
+        <para>
+            Megoldás videó: <link xlink:href="https://youtu.be/IJMbgRzY76E">https://youtu.be/IJMbgRzY76E</link>
+        </para>
+        <para>
+            Megoldás forrása: <link xlink:href="https://gitlab.com/nbatfai/bhax/tree/master/attention_raising/Biomorf">https://gitlab.com/nbatfai/bhax/tree/master/attention_raising/Biomorf</link>
+        </para>
+        <para>
+            Az Mandelbrot-halmaz-hoz szorososan kapcsolódik a Biomorf. Itt viszont A komplex iteráció a Mandelbrot-halmaz-ban egy változó volt, itt viszont állandó. Minden rácsponthoz más értéket vesz vesz az előző feladatokban, a mostaniban viszont ugyan az minden rácspontra.
+	</para> 
+	<para>
+		A Mandelbrot-halmazhoz képest nemcsak a formáján különbözik hanem, ráadásul színes képet is generálunk. Ez azért lehetséges mivel a Mandelbrot-halmazhoz képest más képletet is használunk. Ez úgy valósul meg, hogy az iterávió számát elosztjuk maradékosan 255el, így ebből kapunk egy RGB kódot amivel színezzük az adott pontot.
+	</para>
+	<para>
+Forditas:
+	$ g++ biomorf.cpp -lpng -O3 -o biomorfki
+$ ./biomorfki biomorf.png 800 800 10 -2 2 -2 2 .285 0 10
+
+</para>
+               
+    </section>                     
+
+    <section>
+        <title>A Mandelbrot halmaz CUDA megvalósítása</title>
+        <para>
+        </para>
+        <para>
+            Megoldás videó: 
+        </para>
+        <para>
+            Megoldás forrása:  
+        </para>
+    </section>                     
+
+    <section>
+        <title>Mandelbrot nagyító és utazó C++ nyelven</title>
+        <para>
+            Építs GUI-t a Mandelbrot algoritmusra, lehessen egérrel nagyítani egy területet, illetve egy pontot
+            egérrel kiválasztva vizualizálja onnan a komplex iteréció bejárta z<subscript>n</subscript> komplex számokat!
+        </para>
+            
+        <para>
+            Megoldás forrása:  
+        </para>
+
+        <para>
+            Megoldás videó: 
+        </para>
+        <para>
+            Megoldás forrása:  https://github.com/Drcsonka/Prog1/tree/master/nagyito
+        </para>
+	<para>
+		Ez a feledat is az előbb használt Mandelbrot-halmazra épül. Ezzel a programmal viszont lesz arra is lehetőségünk, hogy a Mandelbrot által generált képet ki tudjuk nagyítani, és részletesebben meg tudjuk nézni egyes részeit.
+	</para>
+    </section>                     
+                                                                                                                                                                            
+    <section>
+        <title>Mandelbrot nagyító és utazó Java nyelven</title>
+        <para>
+        </para>
+    </section>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+</chapter>                
