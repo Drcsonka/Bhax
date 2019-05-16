@@ -24,15 +24,14 @@
             A "free" függvénnyel felszabadítjuk a lefoglalt memóriát.
 
         </para> 
-        <para>
              <mediaobject>
                   <imageobject>
-                      <imagedata fileref="images/pointer.png" format="PNG"/>
+                      <imagedata fileref="images/pointer.png" scale="150"/>
                   </imageobject>
-      </mediaobject>
-        </para>     
+      </mediaobject>    
         <para>
-            Deklarálunk egy 'double **tm' változót. A 'double' változók 8 bájtosak.
+            Deklarálunk egy 'double **tm' változót. A 'double' változók 8 bájtosak. A 'double **tm' változó egy 'double *'-ra mutat, vagyis annak memóriacímére.
+            A 'tm+1' azt jelenti, hogy a 'tm'-nél eggyel arréb mutat, vagyis 4 bájtal arréb. A '*(tm+1)'-el a benne lévő értéket kapjuk.
         </para>      
     </section>        
     <section>
@@ -55,8 +54,10 @@
     </para>
     <para>
         Futtatás:
+        <screen><![CDATA[
         gcc exor_titkosito_.c -o exor
-        ./exor 42351234 <tiszta.txt >titkos.txt
+        ./exor 42351234 *<*tiszta.txt '>'titkos.txt
+        ]]></screen>
         </para>            
     </section>        
     <section>

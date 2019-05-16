@@ -137,6 +137,7 @@ false]]></screen>
         </para>
         <para>
             Megoldás forrása:  https://github.com/Drcsonka/Prog1/blob/master/Labdapattog.c
+            https://github.com/Drcsonka/Prog1/blob/master/labdapattogifnelkul.c
         </para>
         <para>
             Az 'x' es az 'y' tengelyt növeljük, ezzel a képernyőn lévő labda mozog, majd amint eléri az ablak egyik falát akkor az annak megfelelő tengelyt ellentétesen megváltoztatjuk, hogy a masik iranyba mozogjon. Ezzel olyan hatást keltve mintha lepattant volna a falról es a másik irányba kezdett volna mozogni.
