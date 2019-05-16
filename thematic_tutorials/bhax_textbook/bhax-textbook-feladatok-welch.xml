@@ -25,9 +25,23 @@
             pont úgy csinálták meg ahogyan te is, azaz az OO nemhogy nem nehéz, hanem éppen természetes neked!
         </para>
         <para>
-		A C++ és Java nyelvek mind objektumorientált programozási nyelvek. Az objektumok 			segítségével csökkenti a programok bonyolultságának a programozók számára.
-		Az algoritmus matematikai háttere minket nem foglalkoztat jelenleg. A számítás két véletlenszerűe normálizált számot állít elő. Minden páratlan meghíváskor nem kell számolnunk, hanem csak elég az előző lépésben generált másik számot megadni. Ezt egy függvény segítségével tároljuk el, hogy páratlan-e.
+		A feladatot 'C++'-ban és Javaban is megoldjuk. Kezdve 'C++'-al.
         </para>                
+        <para>
+            Először is csinálunk egy osztályt, itt fog elhelyezkedni a Konstruktor és a Dekonstruktor is aminek a neveinek meg kell egyeznie az osztályunk nevével. A konstruktor objektumok létrehozásához kell majd míg a Dekonstruktor az ezek törléséhez.
+        </para>
+        <para>
+            Az osztályban található még a 'tarolt', 'nincsTarolt' változók és a 'kovetkezo()' függvény is. A 'kovetkezo()' függvény egy double típusú értéket fog visszaadni. A 'nincsTárolt' egy boolean típusú változó ami azt fogja nekünk jelezni, hogy van-e eltárolva számunkra kiszámolt szám.   
+        </para>
+        <para>
+            Amennyiben a 'nincstárolt' hamis, a program az eltárolt elemet adja vissza a függvénynek. Ha viszont igaz akkor, egy do-while ciklusban, megnézzük, hogy 'w' nagyobb-e mint 'u1' és 'u2', ha igen kap egy random számot a 'srand()' függvénytől, eközben a 'v1' és 'v2' megkapja 'u1' és 'u2' értékét. A 'w' új értéket kap a 'tárolt'-al együtt. Majd a 'nincstárolt' értéke hamis-ra változik mivel már nem fog elemet tartalmazni.
+        </para>
+        <para>
+            A feladat Java-ban nagyon hasonló és könyebb is mint a C++-os megoldás.
+        </para>
+        <para>
+            Itt is létrehozunk egy osztályt aminek a neve 'PolárGenerátor' lesz. Ez egy publikus osztály ami azt jelenti, hogy a benne lévő egységeket az osztályon kívülről is meg lehet hívni. Itt deklaráljuk a  'nincsTárolt' változót, és a 'következő()' függvényt is, ugyan úgy mint C++-ban. A 'nincsTárolt'-os ciklus is ugyan az mint C++-ban ugyan az lesz, a random szám generáláson kívül. Javában a 'Math.random()' függvény segítségével nagyon könnyedén tudunk random számokat generálni.
+        </para>
     </section>        
 
     <section>
@@ -46,6 +60,12 @@
 		A program lényege, hogy a bemeneti fájl tartalmát átalakítja és kiírja a bináris 			fáját egy külön fájlba.
 		A fa építés elve, hogy amikor a programunk kap egy 1-est vagy 0-ást megnézi, hogy az aktuális csomópont tartalmazza-e azt az elemet. Ha nem betesszük a jelenlegi csomópont gyermekeként. Amennyiben viszont igen akkor csinálunk egy új csomópontot és annak lesz a gyermeke.
 	</para>
+    <para>
+        A programban az 'uj_elem()' függvényben fogjuk lefoglalni a memóriaterületeket, de hibával tér vissza ha nem sikerül elegendő memóriát foglalni. A 'malloc' függvény segítségével fogunk memóriát lefoglalni, ennek paramétere a 'BINFA' váltózó lesz. 
+    </para>
+    <para>
+        A 'szabadit()' függvénnyel fogjuk felszabadítani a jelenlegi fa bal- és jobb oldala által foglalt memóriát. A 'free()' függvénnyel a lefoglalt tárterületet szabadítjuk fel.
+    </para>
     </section>        
         
     <section>
@@ -87,8 +107,16 @@
         </para>
 	<para>
 	Ebben a feladatban megint az eddig használt LZW binfa programot fogjuk használni.
-Ebben az osztályban nem a fa gyökere a mutató, hanem csak egy objektum, a fa lesz ebben az esetben a mutató, ami mindig az épülő fa jelenlegi csomópontjára fog mutatni. 
-  Ha a programunk 0-at kap, akkor megnézzük, hogy az jelenlegi csomópontunknak van e 0-ás gyermeke. Ha nincs, akkor új csomópontot hozunk étre. Ezután az aktuális csomópont nullás gyermekét ráallítjuk az új csomópontra és a fával visszaállunk a gyökérre.Ha viszont van nullás gyerkmek, akkor a fa mutatóját állítjuk rá. Ha 1-est kapunk akkor is ugyan ez történik.
+    Csak C++-ban írva és nem C-ben.
+</para>
+<para>
+     Az első változás abban lesz, hogy itt már használhatunk osztályokat. Az osztályokban nemcsak változókat, hanem függvényeket is írhatunk. Az osztályokban deklarált függvényeket az osztályon kívül definiáljuk.
+</para>
+<para>
+      Még egy érdekesség az operátor túlterhelés ami segítségével az módosítani tudjuk, hogy egy operátor mit csináljon. A programban arra használjuk, hogy a bemenetként kapott elemeket a fába shifteljük, az 'LZW' algoritmusnak megfelelően.
+</para>
+<para>
+  Ha a programunk 0-at kap, akkor megnézzük, hogy az jelenlegi csomópontunknak van e 0-ás gyermeke. Ha nincs, akkor először a 'new'-val lefoglaljuk a tárterületet és egy új csomópontot hozunk létre. Ezután az aktuális csomópont nullás gyermekét ráallítjuk az új csomópontra és a fával visszaállunk a gyökérre.Ha viszont van nullás gyerkmek, akkor a fa mutatóját állítjuk rá. Ha 1-est kapunk akkor is ugyan ez történik.
 	</para>
     </section>        
                 
