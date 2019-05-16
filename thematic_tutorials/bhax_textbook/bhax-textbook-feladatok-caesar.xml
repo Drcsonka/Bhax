@@ -6,7 +6,7 @@
         </keywordset>
     </info>
     <section>
-        <title><type>int ***</type> háromszögmátrix</title>
+        <title><type>double **</type> háromszögmátrix</title>
         <para>
            
         </para>
@@ -23,7 +23,17 @@
 	    Egy for ciklussal végigmegyunk a lefoglalt teruleten és minden double tipusú teruletre állítunk egy mutatót, majd ezek a mutatók alkotják a háromszögmátrixot.
             A "free" függvénnyel felszabadítjuk a lefoglalt memóriát.
 
-        </para>            
+        </para> 
+        <para>
+             <mediaobject>
+                  <imageobject>
+                      <imagedata fileref="images/pointer.png" format="PNG"/>
+                  </imageobject>
+      </mediaobject>
+        </para>     
+        <para>
+            Deklarálunk egy 'double **tm' változót. A 'double' változók 8 bájtosak.
+        </para>      
     </section>        
     <section>
         <title>C EXOR titkosító</title>
@@ -42,8 +52,11 @@
 	    ha a kettó különböző és 0-t ha megegyeznek.
 	    A program elején megadjuk a titkosítani szánt szöveg méretét, ez alapján a program
 	    generál egy megfelelő méretű kulcsot. Ezután a kettő összehasonlításával megalkotja a titkosított szöveget.
-
-
+    </para>
+    <para>
+        Futtatás:
+        gcc exor_titkosito_.c -o exor
+        ./exor 42351234 <tiszta.txt >titkos.txt
         </para>            
     </section>        
     <section>
@@ -104,8 +117,13 @@ https://github.com/Drcsonka/Prog1/blob/master/ExorTitkosito.java
             Megoldás forrása:     https://github.com/Drcsonka/Prog1/blob/master/main.cpp           
         </para>
         <para>
-            A Mandelbrot feladatból kapott képet használjuk fel bemenetként. Végigmegyünk a képen, megnézzük a magasságát és szélességét, és eltároljuk az ebből kapott piros színt (RGB színkódból az R(red)-t). Az ezt kapott pirost berakjuk a perceptron 3. rétegébe. 
+            A Mandelbrot feladatból kapott képet használjuk fel bemenetként. Ezt a 'png::'-vel kezdődő sorban állítjuk be, és majd az első parancssori argumentumban adjuk meg. A 'get_width' és a 'get_height' szorzatából kapjuk meg a képünk méretét amit el is fogunk tárolni. A 'Perceptron *p' változóban létrehozunk egy új perceptront aminek 4 paramétert kell megadnunk. Az első a rétegek száma (3) , a második a 'size' vagyis az első rétegre annyi neutront akarunk (size) , a harmadik 256, vagyis a második réteg neuronjai (256), a negyedik az eredmény (1).
         </para>            
+         <para>
+            Két egymásba ágyazott 'for' ciklussal végigmegyünk a kép szélességén és magasságán. Eközben az 'image' változóban tárolódik a kép vörös színkomponensei.
+            A Perceptronunkat meghívjuk az 'image'-re és megadjuk a 'value'értékét, ezzel egyben a perceptronba is tárolásra kerül a vörös színkomponens. A 'value' egy double típusu változó, amit kiírunk.
+            A 'delete()' fügvénnyel felszabadítjuk a Perceptronunk által foglalt memóriát.
+         </para>
     </section>        
         
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         

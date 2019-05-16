@@ -107,8 +107,41 @@ $ ./biomorfki biomorf.png 800 800 10 -2 2 -2 2 .285 0 10
             Megoldás forrása:  https://github.com/Drcsonka/Prog1/tree/master/nagyito
         </para>
 	<para>
-		Ez a feledat is az előbb használt Mandelbrot-halmazra épül. Ezzel a programmal viszont lesz arra is lehetőségünk, hogy a Mandelbrot által generált képet ki tudjuk nagyítani, és részletesebben meg tudjuk nézni egyes részeit.
+		A feladat megoldásához QT-t fogunk használni, mivel egyszerűen tudunk grafikus felületen programokat létrehozni.
 	</para>
+    <para>
+        A feladatunk 5 fájlból / részből fog összeállni.
+    </para>
+    <para>
+        Az első rész a 'main.cpp' lesz.
+    </para>
+    <para>
+        A Qt-t fogjuk előkészíteni itt, meghívni a hozzá szükséges könyvtárakat. A 'Q Application'-al példányosítjuk, és majd meghívásra kerül a konstruktor.
+    </para>
+    <para>
+        A második rész lesz a 'farkablak.h'.
+    </para>
+    <para>
+        Ez egy header fájl, amit a 'main.cpp'-hez kapcsolunk. Ebben a header fájlban fogjuk deklarálni a billenytűlenyomás, egérmozgás és kattintáshoz használatához szükséges függvényeket.
+    </para>
+    <para>
+        A harmadik rész a 'frakablak.cpp' fájlban található.
+    </para>
+    <para>
+        Itt a 'farkablak.h' fájl által deklarált függvényeket fogjuk definiálni. 
+    </para>
+    <para>
+        A negyedik rész a 'farkszal.h'.
+    </para>
+    <para>
+        Ebben a header fájlban fogjuk deklarálni a számoláshoz és rajzoláshoz használt változókat.
+    </para>
+    <para>
+        Az ötödik és egyben utolsó rész a 'farkszal.cpp' fájlban lesz.
+    </para>
+    <para>
+        Itt fogjuk a Mandelbrot-halmaz-t megrajzolni. Végighaladunk a szélességen és magasságon. Minden pontot elemezve, hogy része-e a Mandelbrot-halmaznak.
+    </para>
     </section>                     
                                                                                                                                                                             
     <section>

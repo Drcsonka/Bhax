@@ -23,7 +23,8 @@
         <para>
             Tanulságok, tapasztalatok, magyarázat... térj ki arra is, hogy a JDK forrásaiban a Sun programozói
             pont úgy csinálták meg ahogyan te is, azaz az OO nemhogy nem nehéz, hanem éppen természetes neked!
-
+        </para>
+        <para>
 		A C++ és Java nyelvek mind objektumorientált programozási nyelvek. Az objektumok 			segítségével csökkenti a programok bonyolultságának a programozók számára.
 		Az algoritmus matematikai háttere minket nem foglalkoztat jelenleg. A számítás két véletlenszerűe normálizált számot állít elő. Minden páratlan meghíváskor nem kell számolnunk, hanem csak elég az előző lépésben generált másik számot megadni. Ezt egy függvény segítségével tároljuk el, hogy páratlan-e.
         </para>                

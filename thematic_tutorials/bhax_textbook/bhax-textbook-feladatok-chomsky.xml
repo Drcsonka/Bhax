@@ -60,7 +60,7 @@ https://github.com/Drcsonka/Prog1/blob/master/c89.c
 https://github.com/Drcsonka/Prog1/blob/master/c99.c	
         </para>
         <para>
-            Ez a program c89-ben nem fut le mivel ebben a verzioban meg nem lehet valtozot deklaralni cikluson belul.
+            A programban egy ciklus található ami 1-10ig megy el.C99-ben le fog futni miközben, c89-ben nem fog, mivel ebben a verzióban még nem lehet változót deklarálni a ciklus fejben.
         </para>
     </section>                     
 
@@ -80,10 +80,23 @@ https://github.com/Drcsonka/Prog1/blob/master/Lexikalis.l
         </para>
         <para>
             Tanulságok, tapasztalatok, magyarázat...
-A lex program segítségével, nekünk csak azt kell megadnunk, hogy mi alapján figyelje a program számára megadott szöveget.
-            A program a 'db' változóban számolja a számokat. A szamok kiírásához, 'Ctrl+D'-t kell nyomnunk.
-
         </para>
+        <para>
+            A lex program segítségével, nekünk csak szabályokat kell megadnunk, ami alapján használható szabványos programkódot fog előállítani.
+        </para>
+        <para>
+            A programunk 3 részből áll.
+        </para>
+        <para>
+            Az első rész C kódot tartalmaz.
+        </para>
+        <para>
+            A második részben szabályokat definiálunk. A reguláris kifejezésekkel kezdünk. A másik a program által kapott szöveget fogja elemezni. Az 'atof()' függvénnyel fogjuk a 'string'-eket double típúsra átalakítani.
+        </para>
+        <para>
+            A harmadik részben található a 'yylex()' függvény ami a második részben megadott szabályokat hívja meg. Majd kiírajta az eredményt.
+        </para>
+
     </section>                     
 
     <section>
@@ -95,12 +108,20 @@ A lex program segítségével, nekünk csak azt kell megadnunk, hogy mi alapján
             Megoldás videó: 
         </para>
         <para>
-            Megoldás forrása:  https://github.com/Drcsonka/Prog1/blob/master/l337d1c7.c
+            Megoldás forrása:  https://github.com/Drcsonka/Prog1/blob/master/leet.l
         </para>
         <para>
-            A l33t hackerek és crackerek által hasznalt nyelv. A lenyege, hogy a betuket es szamjegyeket rajuk hasonlito karakterekkel helyetessiti.
-	    Egy karakternek 4 különböző változata is van. És a Srand függvény miatt nem csak ugyan az a változat ismétlődik. 90 %-ban az első változat szokott használatba lépni.
-        </para>
+            A l33t nyelv lényege, hogy a betűket rájuk hasonlító karakterekkel és számokkal helyetessíti. Ez a program is a lex program használatával fog működni.
+	    </para>
+	    <para>
+	    	Az program első részében a 'L33SIZE' elemet fogjuk definálni. Ez fogja a majd helyettesíteni az kért szöveget. Meg van adva egy 'c' változó amiben az alap karakter van és a '*leet[4]' tömben a 4 változata van amire kicserélhetjük. Ebből a 2 változóból fog összeállni a 'l337d1c7[]' tömbünk.
+	    </para>
+	    <para>
+	    	Majd megvizsgáljuk egyesével a karaktereket egy reguláris kifejezéssel. Meghívjuk egy 'for' ciklusban a 'L33SIZE' konstanst, ide fog majd behelyettesíteni. 
+	    </para>
+	    <para>
+	    	A programunk nem tud mit csinálni az uppercase karakterekkel ezért van a 'tolower' függvényünk ami átfogja ezeket allakítani kisbetűre. Majd generálunk egy random számot 1-100ig, és ez alapján döntjük el, hogy a 4 változat alapján melyikkel helyettesítsük karakterünket.
+	    </para>
     </section>                     
 
 
@@ -128,33 +149,57 @@ A lex program segítségével, nekünk csak azt kell megadnunk, hogy mi alapján
             <listitem>                                    
                 <programlisting><![CDATA[if(signal(SIGINT, SIG_IGN)!=SIG_IGN)
     signal(SIGINT, jelkezelo);]]></programlisting>
+    		<para>
+            	Ez a kód részlet azt jelenti, hogy ha a 'SIGINT' jel kezelése nem volt figyelmen kívül hagyva akkor ezután se legyen.
+            </para>
             </listitem>
+
             <listitem>                                    
-                <programlisting><![CDATA[for(i=0; i<5; ++i)]]></programlisting>            
+                <programlisting><![CDATA[for(i=0; i<5; ++i)]]></programlisting>  
+                <para>
+                	Egy 'for' ciklus fog lefutni ami 0-4ig fogja kiírni a számokat egyesével. Mivel a '++i' változót használata előtt növelem, így 5-re növelve már nem fut le mégegyszer, hanem vége lesz a ciklusnak.
+                </para>          
             </listitem>
             <listitem>                                    
 
-                <programlisting><![CDATA[for(i=0; i<5; i++)]]></programlisting>            
+                <programlisting><![CDATA[for(i=0; i<5; i++)]]></programlisting> 
+                <para>
+                	Ez a ciklus hasonlít az előzőhöz, annyi különbség van a kettő között, hogy itt az 'i' változót először használjuk és utánna változtatjuk. 
+                </para>           
             </listitem>
             <listitem>                                    
 
-                <programlisting><![CDATA[for(i=0; i<5; tomb[i] = i++)]]></programlisting>            
+                <programlisting><![CDATA[for(i=0; i<5; tomb[i] = i++)]]></programlisting>    	 <para>
+                	A 'for' ciklus mind eddig is 0tól addig megy még el nem éri az 5-öt. Közbe a 'tomb' i-edik elemébe belerakja az 'i' értékét is. A program le fog futni de, bugos, és nem a vár eredményt kapjuk. 'Splint' lefutattása szerint is hibás.  
+                	</para>  
             </listitem>
             <listitem>                                    
 
-                <programlisting><![CDATA[for(i=0; i<n && (*d++ = *s++); ++i)]]></programlisting>            
+                <programlisting><![CDATA[for(i=0; i<n && (*d++ = *s++); ++i)]]></programlisting>
+                <para>
+                	A ciklusunknak addig kéne futnia ameddig 'i' el nem éri az 'n' értékét, de emelett van egy másik feltételünk is, hogy a 'd' és az 's' pointer 'egyenlő' nem lesz, miközben növeljük őket. De ez a rész csak egy '='-et tartalmaz ami magában nem megfelelő, így bugos a program.
+                </para>            
             </listitem>
             <listitem>                                    
 
                 <programlisting><![CDATA[printf("%d %d", f(a, ++a), f(++a, a));]]></programlisting>            
+             <para>
+             		A programkódnak kiíratja az 'f()' függvény értékét kétszer. A probléma ott lesz, hogy az első meghívásnál megváltoztatjuk 'a'-nak az értékét amit majd a másodikban felhasználunk újra. Mivel a kiírtékelési sorrend nincs előre megadva így bugos lesz.
+             </para>
+
             </listitem>
             <listitem>                                    
 
-                <programlisting><![CDATA[printf("%d %d", f(a), a);]]></programlisting>            
+                <programlisting><![CDATA[printf("%d %d", f(a), a);]]></programlisting>       <para>
+                Ez a programkód már helyes. Az 'f()' függvény egy paramétert kér amit az 'a'-val megkap, és ennek az eredménye lesz kiírva.
+                </para>
             </listitem>
             <listitem>                                    
 
-                <programlisting><![CDATA[printf("%d %d", f(&a), a);]]></programlisting>            
+                <programlisting><![CDATA[printf("%d %d", f(&a), a);]]></programlisting> 
+                <para>
+                	Itt is az 'f()' függvény értékét fogjuk kiírni, csak azzal a különbséggel, hogy egy memóriacímre mutató értéket fog kapni a függvény.
+                </para>
             </listitem>
         </orderedlist>
         <para>
@@ -167,6 +212,10 @@ A lex program segítségével, nekünk csak azt kell megadnunk, hogy mi alapján
 
         <para>
             A program lefutasa elohiv egy vegtelen ciklust, amibol a CTRL + C billentyukombinacioval sem tudunk kilepni.
+
+        </para>
+        <para>
+        	A 'splint' egy olyan eszköz ami segít megnézni 'C'-ben írt kódokat, és azokban hibákat találni.
         </para>
 
     </section>                     
