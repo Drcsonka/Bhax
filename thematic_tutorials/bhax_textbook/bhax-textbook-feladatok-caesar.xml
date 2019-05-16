@@ -56,7 +56,7 @@
         Futtatás:
         <screen><![CDATA[
         gcc exor_titkosito_.c -o exor
-        ./exor 42351234 *<*tiszta.txt '>'titkos.txt
+        ./exor 42351234 <tiszta.txt >titkos.txt
         ]]></screen>
         </para>            
     </section>        
