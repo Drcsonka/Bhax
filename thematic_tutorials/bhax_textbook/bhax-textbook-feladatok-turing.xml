@@ -121,7 +121,7 @@ false]]></screen>
             Megoldás forrása: https://github.com/Drcsonka/Prog1/blob/master/valtozocsere.c
         </para>
         <para>
-            A minusz előjel felhasznalasaval, és a +, - matematikai muveletekkel, sikeresen meg tudjuk cserelni a ket valtozo erteket. Ez a legegyszerűbb módja a változ
+            A minusz előjel felhasználásával, és a +, - matematikai műveletekkel, sikeresen meg tudjuk cserélni a két változó értékét. Ez a legegyszerűbb módja a változók felcserélésére.
         </para>
     </section>                     
 
@@ -137,9 +137,23 @@ false]]></screen>
         </para>
         <para>
             Megoldás forrása:  https://github.com/Drcsonka/Prog1/blob/master/Labdapattog.c
+            https://github.com/Drcsonka/Prog1/blob/master/labdapattogifnelkul.c
         </para>
         <para>
-            Az es a x,y tengelyt noveljuk, ezzel a kepernyon levo levo labda mozog, majd amint eléri az ablak egy oldalat akkor az annak megfelelo tengelyt ellentetes ertekbe tesszuk ezzel elerjuk, hogy a masik iranyba mozogjon, es ezzel olyan hatast kelt mintha lepattant volna a falról es a masik iranyba kezd el mozogni.
+            Az 'x' es az 'y' tengelyt növeljük, ezzel a képernyőn lévő labda mozog, majd amint eléri az ablak egyik falát akkor az annak megfelelő tengelyt ellentétesen megváltoztatjuk, hogy a masik iranyba mozogjon. Ezzel olyan hatást keltve mintha lepattant volna a falról es a másik irányba kezdett volna mozogni.
+
+		</para>
+		<para>
+            A program elején deklaráljuk a labda koordinátáit. Az 'if'-es megoldásban ez az 'x' és 'y' változók lesznek, miközben az 'if' nélküli megoldásban 'xj', 'xk' és 'yj', 'yk'-k lesznek.
+		</para>
+		<para>
+            A program a 'clear()' function letisztítja számunkra a képernyőt.
+            A 'refresh()' function újratölti a képernyőt.
+
+		</para>
+		<para>
+            Az 'if' nélküli feladatot maradékos osztással oldjuk meg.
+
         </para>
     </section>                     
 
