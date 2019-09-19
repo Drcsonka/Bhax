@@ -1,0 +1,61 @@
+<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xi="http://www.w3.org/2001/XInclude" version="5.0" xml:lang="hu">
+    <info>
+        <title>Helló, Berners Lee!</title>
+        <keywordset>
+            <keyword/>
+        </keywordset>
+    </info>
+
+    <section>
+        <title>Java és a C++ kapcsolata</title>
+        <para>
+            A konyv azzal kezdodik, hogy a Java mennyi mindent atvett a C++-ból, főleg az objektum orientáltságot, mivel a C++ egy objektum orientált nyelv. Az objektum orientált programozás célja, hogy  a programunk élethű legyen, ahol osztályokat és objektumokat hasznalunk, az objektumnak vannak tulajodnságai és viselkedésük is. A tulajdonságaik leírására mezőket vagyis változókat, eközben a viselkedésüket medódusokkal vagy másnéven függvényekkel. Bar nem mindig van visszatérési értékük. A változókban tároljuk az adatokat míg, a metódusokban az adatokon végezhető műveleteket. Az objektumok lehetnek fizikai vagy logikai dolgok. Az objektum orientáltságnál fontos megemlíteni az öröklődést. Amikor az egyik objektum örökli minden tulajdonságát és viselkedését a szülőobjektumától.
+            A Java-ban ezen kívül nagy figyelmet fordítottak a biztonságra és a megbízhatóságra. Megfigyelhettük, hogy a Java fordítóprogram egy bájtkód formátumra fordítja le a forráskódot, melyet a Java Virtuális Gép önálló  interpretensként fog értelmezni. Biztonságosabb mint a c++,de valamilyen szinten lasabb, míg a C++-ban compiler végzi a fordítást ami gépi kódra fordítja a programot. Ezért a Java platform független. Míg azért a C++-nál vannak megkötések.
+        </para>
+        <para>
+            Mindkét nyelv ugyan azokat a változó típusokat használják.
+        </para>
+        <para>
+        Javaban könnyen tudunk html friendly kódot is irní. Az ilyen oldalalak a hasznalata közben a java kódrész is letöltödik es futni fog, de mivel a javanak ugyelnek arra, hogy biztonságos legyen igy  a vírusok nem okoznak nagy problémát. Az ilyen kódoknak jellegzetessége, hogy nincs main metódusuk.    
+        </para>
+       
+        <para>
+Ha Javában több osztályunk van akkor ilyen esetben azt fogja lefuttatni alapértelmezetten, amelyik a Java Virtual Machine (Java Virutális gép) megtalálja a main-t.Javaban a metódus számára kötelező a visszatérési típus megadása minden esetben.
+            A C++-tól eltérően itt egy String szövegtömbbe kerülnek átadásra a paraméterek nem char-ba.
+            Java-ban már 16 bites Unicode karaktereket is használhatunk változók vagy konstansok deklarálásához, tehát használhatunk ékezetes
+            karaktereket, görög ábécé betűit stb. Mikozben C++-ban és C-ben csak 7 vagy 8 bites karaktereket tudtunk használni.
+        </para>
+            Javában a megjegyzések megegyezik a C++-éval, csak itt még additionally vannak dokumentációs megjegyzések, ami olyan mint a több soros megjegyzés, 2 db *-al kezdjük, és a javadochoz tudjunk felhasaználni.
+        <para>
+            Javában is ugyan úgy a class szóval hívjuk meg az osztályokat.Itt minden osztály tagnak egyessével adhatjuk meg a láthatóságát (private, public). Ha elhagyjuk ezt a láthatósgági részt akkor csak az adott osztályban látható.
+            Az objektumokat Javában is a 'new' szóval hozzuk létre. Az új objektumok létrehozásukkor 0 vagy null értékkel jönnek létre.
+            A 'static' tagot az osztály illesztéséhez, elérjük, hogy a 'new'-nál nem foglalódik le memóriaterület az objektumban.Nem kell inicializálásnál értéket adni nekik. Ezen kívül az osztály nevével is hivatkozhatunk rá.
+            A 'static'-al jelolt objektumokból mindig csak egy lesz, akarmennyit is csinálunk. A memória felszabadíta egyszerűen csak annyi, hogy már nem hivatkozunk az objektumra, azaz null értéket adunk neki, míg C++-ban metódust kellett hozzá használnunk (delete, free).
+        </para>
+	<para>
+A Java nyelvben a tömböket '[]' jelöléssel adjuk meg.Ez egy igazi típus lesz és nem csak a mutató típus egy másik megjelenítési formája mint ahogy ez C++-ban volt. A tömb típusok nem primitív típusok, a tömb típusú változók objektumhivatkozást tartalmaznak. Eltérés még a C++ és a Java között, hogy a Java-ban nincsenek többdimenziós tömbök, de erre a megoldás a tömbben tömb.
+	</para>
+    </section>
+    <section>
+        <title>Python</title>
+        <para>
+
+
+
+Guido van Rossum alkotta meg 1990-ben a Pythont ami egy magas szintű objektum orientált programozási nyelv amit prototípusok vagy algoritmusok tesztelésére használnak főként. A python népszerűsége abban rejlik, hogy rengeteg modult tartalmaz és olyanokat amik más nyelvek modulja is például fájlkezelés, hálózatkezelés. A Python-ban írt programok sokkal rövidebbek mint más nyelvekben írt programok, például ha javában vagy C-ben írnánk meg. Ennek titka, hogy a kód tömör de jól olvasható. Egyáltalán nincs szükség nyitó és zárójelekre, elég ha csak egy új behúzást csinálunk, és az hozzá fog tartozni. Nemkell váltózókat és argumentumokat definiálni és a váltózók típusát sem mivel a program magától felismeri, hogy az milyen típusú változó akar lenni abban az esetben. Számok lehetnek például:egészek, lebegőpontosak és komplex számok, miközben a stringeket (' ') között adjuk meg.	A hozzárendelést az '=' karakterrel végezzük éss 'del' kulcsszóval töröljük számok. De viszont a kis és nagybetűkre érzékeny a nyelv. A sorok végén sincs szükség utasítás záróra mint például a ';'. Ha viszont folytatni szeretnénk az utasítást a következő sorban akkor a '\' jel használatával tudjuk ezt megtenni.
+
+
+</para>
+        <para>
+	Megjegyzést a '#' karakterrel tudjuk szerepeltetni, és a NULL érték helyett 'none'-t használunk.
+        Itt is ugyan úgy mint Javában, ha egy váltózóra nem mutatnak akkor az alapértelmezetten felszabadul.
+	Ha a függvényben létrehozott változókat globálisnak akarjuk tudni akkor a függvény elé kell írni a 'global' szót, mivel alapértelmezetten lokálisak lesznek.
+        </para>
+        <para>
+	    Az értelmező a sorokat tokenekre bontja, amelyek közt tetszőleges üres (whitespace)
+            karakter lehet. A tokenek lehetnek: azonosító,kulccszó, operátor, delimiter, literál.
+            A függvények itt is hasonlóak, például az else if helyett elif-van. A  fornál a 3-as tagolás helyett kettő lett csak. Megkell adni min lépkedjen végig a ciklus.
+            Függvényeket a def kulcsszóval hozhatunk létre.Egy visszatérési értékük van,de akár ennesekkel is visszatérhet.
+        </para>
+    </section>
+</chapter>
