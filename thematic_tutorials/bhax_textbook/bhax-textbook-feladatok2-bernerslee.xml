@@ -23,9 +23,10 @@
 Ha Javában több osztályunk van akkor ilyen esetben azt fogja lefuttatni alapértelmezetten, amelyik a Java Virtual Machine (Java Virutális gép) megtalálja a main-t.Javaban a metódus számára kötelező a visszatérési típus megadása minden esetben.
             A C++-tól eltérően itt egy String szövegtömbbe kerülnek átadásra a paraméterek nem char-ba.
             Java-ban már 16 bites Unicode karaktereket is használhatunk változók vagy konstansok deklarálásához, tehát használhatunk ékezetes
-            karaktereket, görög ábécé betűit stb. Mikozben C++-ban és C-ben csak 7 vagy 8 bites karaktereket tudtunk használni.
+            karaktereket, görög ábécé betűit stb. Mikozben C++-ban és C-ben csak 7 vagy 8 bites karaktereket tudtunk használni.           
+ Javában a megjegyzések megegyezik a C++-éval, csak itt még additionally vannak dokumentációs megjegyzések, ami olyan mint a több soros megjegyzés, 2 db *-al kezdjük, és a javadochoz tudjunk felhasaználni.
         </para>
-            Javában a megjegyzések megegyezik a C++-éval, csak itt még additionally vannak dokumentációs megjegyzések, ami olyan mint a több soros megjegyzés, 2 db *-al kezdjük, és a javadochoz tudjunk felhasaználni.
+
         <para>
             Javában is ugyan úgy a class szóval hívjuk meg az osztályokat.Itt minden osztály tagnak egyessével adhatjuk meg a láthatóságát (private, public). Ha elhagyjuk ezt a láthatósgági részt akkor csak az adott osztályban látható.
             Az objektumokat Javában is a 'new' szóval hozzuk létre. Az új objektumok létrehozásukkor 0 vagy null értékkel jönnek létre.
