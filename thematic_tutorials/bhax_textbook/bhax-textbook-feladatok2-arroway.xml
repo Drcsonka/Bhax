@@ -7,24 +7,50 @@
     </info>
 
     <section>
-        <title>A BPP algoritmus Java megvalósítása</title>
+        <title>OO szemlélet</title>
         <para>
+	A módosított polártranszformációs normális generátor beprogramozása Java nyelven. Mutassunk rá,
+hogy a mi természetes saját megoldásunk (az algoritmus egyszerre két normálist állít elő, kell egy
+példánytag, amely a nem visszaadottat tárolja és egy logikai tag, hogy van-e tárolt vagy futtatni kell
+az algot.) és az OpenJDK, Oracle JDK-ban a Sun által adott OO szervezés ua.!
+        </para>
+	<para>
+	    Megoldás forrása Javában:  https://github.com/Drcsonka/Prog2/blob/master/polargenerator.java
+	</para>
+        <para>
+            Megoldás forrása C++-ban:  https://github.com/Drcsonka/Prog2/blob/master/polargen.cpp              
         </para>
         <para>
-            Megoldás videó:
+            Ezzel a programmal már foglalkoztunk Prog1-en.
         </para>
-        <para>
-            Megoldás forrása:                
-        </para>
-        <para>
-            Tanulságok, tapasztalatok, magyarázat...
-        </para>
+	<para>
+	A programunk két változót fog előállítani, az első fogja tárolni az értékünkket egy 'tarolt' nevu double változóban. A másik egy boolean típusú változó lesz amit azt fogja tárolni, hogy van-e számunk eltárolva vagy sem.
+
+</para>
+<para>
+	A program eleje egy 'if' elagazás aminek az 'igaz' része fog lefutni, mivel a második változónk vagyis 'nemTarolt' 'true'. Ez álltal, lefut a benne lévő do while ciklus ami generálni fog egy 1-nél nagyobb számot, majd eltároljuk ezt a 'tarolt' valtozóba, és a 'nemTarolt' változót hamis-á tesszük. 
+	Majd következő futtatásra, az 'if' ciklusunk 'hamis' része fog lefutni, ami kiíratja a letárolt számot, és a 'nemTarolt' logikai változót negatívvá változtatjuk, hogy legközelebb, amikor újra lefuttatjuk a programot, újra 2 számot kapjunk.
+</para>
+<para>
+	A C++-os verzióban nem elég csak a konstruktort de a dekonstruktort is megkell írni, mivel itt nincs GarbageCollectorunk mint Java-ban.
+</para>
+<para> 
+
+	</para>
     </section>        
 
+
+
+
     <section>
-        <title>Java osztályok a Pi-ben</title>
+        <title>Homokózó</title>
         <para>
-            Az előző feladat kódját fejleszd tovább: vizsgáld, hogy Vannak-e Java osztályok a Pi hexadecimális kifejtésében!
+            Írjuk át az első védési programot (LZW binfa) C++ nyelvről Java nyelvre, ugyanúgy működjön!
+Mutassunk rá, hogy gyakorlatilag a pointereket és referenciákat kell kiirtani és minden máris működik
+(erre utal a feladat neve, hogy Java-ban minden referencia, nincs választás, hogy mondjuk egy
+attribútum pointer, referencia vagy tagként tartalmazott legyen).
+Miután már áttettük Java nyelvre, tegyük be egy Java Servletbe és a böngészőből GET-es kéréssel
+(például a böngésző címsorából) kapja meg azt a mintát, amelynek kiszámolja az LZW binfáját!
         </para>
         <para>
             Megoldás videó:
@@ -37,5 +63,84 @@
         </para>
     </section>        
         
+
+
+<section>
+        <title>„Gagyi”</title>
+        <para>
+            Az ismert formális2 tesztkérdéstípusra adj a szokásosnál
+(miszerint x, t az egyik esetben az objektum által hordozott érték, a másikban meg az objektum
+referenciája) „mélyebb” választ, írj Java példaprogramot mely egyszer végtelen ciklus, más x, t
+értékekkel meg nem! A példát építsd a JDK Integer.java forrására3
+, hogy a 128-nál inkluzív objektum
+példányokat poolozza!
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása:https://github.com/Drcsonka/Prog2/blob/master/gagyi.java           
+        </para>
+        <para>
+	A lábjegyzetben talált segédlet alapján jobban megértve a feladatot és kipróbálva a próbafeladatokat a '-129' használatával mindkettő változónál végtelen ciklusba torkollunk. Miközben a '-128' használatával nincs végtelen ciklus
+
+
+A feladat megoldásához a fentebb említett, JDK Integer.java forrását kell megvizsgálnunk!
+A '-128' még az előző forrásban talált intervallumon belül található, így ugyan abból a poolból kapnak majd Integer és mivel ugyan az az értékük így ugyanazt az objektumot kapják, ezért a címük is meg fog eggyezni, így nem teljesül a feltétel és nem kerül végtelen ciklusba.
+A '-129'-es példánál viszont, más a helyzet mivel a '-129' már másik intervallumbanvan, így a különböző Integer objektum jön létre, más címekkel és így a feltétel teljesülése miatt, végtelen ciklusunk lesz...
+
+        </para>
+    </section> 
+
+	<section>
+        <title>Yoda</title>
+        <para>
+            Írjunk olyan Java programot, ami java.lang.NullPointerEx-el leáll, ha nem követjük a Yoda
+conditions-t! https://en.wikipedia.org/wiki/Yoda_conditions
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása: https://github.com/Drcsonka/Prog2/blob/master/yoda.java               
+        </para>
+        <para>
+   A Yoda condition nevét a Starwars karakterről kapta, aki a mondat második felét mondta először és utánna az elsőt, ezzel felcserélve a kettőt.
+            A Yoda condition lényege a programozásban, hogy egy ekvivalenciánál a megszokottól eltérően a konstanst nem a jobb oldalon helyezkedik el, hanem a bal oldalon.
+            Ezt legfőkébb Stringeknél szokták alkalmaazni. Szóval nem az objektumunkat hasonlítjuk össze a stringgel, hanem a stringet az objektumunkkal.
+            A módszer előnye, hogy elkerüljük a NullPointerExceptions-t, de a hátránya azonban az, hogy a kód olvasása nehezebb lesz mivel ilyenkor jobbról balra olvassuk a feltételeket.
+        
+
+        </para>
+    </section> 
+
+	<section>
+        <title>Kódolás from scratch</title>
+        <para>
+            Induljunk ki ebből a tudományos közleményből: http://crd-legacy.lbl.gov/~dhbailey/dhbpapers/bbpalg.pdf és csak ezt tanulmányozva írjuk meg Java nyelven a BBP algoritmus megvalósítását!
+Ha megakadsz, de csak végső esetben: https://www.tankonyvtar.hu/hu/tartalom/tkt/javat-tanitokjavat/apbs02.html#pi_jegyei (mert ha csak lemásolod, akkor pont az a fejlesztői élmény marad ki,
+melyet szeretném, ha átélnél).
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása:                
+        </para>
+        <para>
+            Az algoritmus segítégével a Pi számjegyeit nem csak egy tizedestől kezdve, hanem egy tetszőleges kezdőponttól is ki tudjuk számolni, így az előtte lévő számjegyeket nemkell kiszámítanunk.
+       
+
+A konstruktorunknak van egy paramétere ami a 'd' lesz. Ezt követően létrehozzuk a változókat. Kezdetben a d16pi-t aminek kezdőértéke a 0.0d-vel lesz, ezzel jelölve, hogy double értékű lesz. Az S1,S4,S5,S6-al számoljuk az értékét. A kiszámított értékből kivonjuk a lefelé kerekített értékét a d16Pi-nek ezzel elérve, hogy 0 és 1 közé essen d16Pi értéke.
+          Majd létrehozunk egy while ciklust, ami addig meg fog dolgozni még a d16Pi értéke 0 nem lesz, majd lekerekítjük és eltároljuk ezt a jegybe.
+Ha a jegy 10-nél kisebb nem kell vele semmit csinálnunk. De mivel a 16-os számrendszerben a 9-nél nagyobb számok már betűkként szerepelnek (A-F) így ha 9-nél nagyobb, akkor a visszaadott értéket a hexajegyekből választjuk. Ezt úgy valósítjuk meg, hogy ha például 12-őt kapunk akkor abból kivonva 10-et kapjuk a 2-őt és 2-es indexű elemet a tömbben használjuk.
+        
+
+        </para>
+    </section> 
+
+
+
+
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
 </chapter>                
