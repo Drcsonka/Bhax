@@ -1,0 +1,118 @@
+<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xi="http://www.w3.org/2001/XInclude" version="5.0" xml:lang="hu">
+    <info>
+        <title>Helló, Mandelbrot!</title>
+        <keywordset>
+            <keyword/>
+        </keywordset>
+    </info>
+
+    <section>
+        <title>Reverse engineering UML osztálydiagram</title>
+        <para>
+	UML osztálydiagram rajzolása az első védési C++ programhoz. Az osztálydiagramot a forrásokból
+generáljuk (pl. Argo UML, Umbrello, Eclipse UML) Mutassunk rá a kompozíció és aggregáció
+kapcsolatára a forráskódban és a diagramon, lásd még: https://youtu.be/Td_nlERlEOs.
+https://arato.inf.unideb.hu/batfai.norbert/UDPROG/deprecated/Prog1_6.pdf (28-32 fólia)
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása:                
+        </para>
+	<para>
+        
+            Az UML (Unified Modelling Language) egy szabványosított modellező
+            nyelv.Az UML egy gyakorlati, objektumoritentált modellező megoldás.
+            Főleg arra használjuk, hogy olyan diagrammokat készítésünk, amik egy rendszer          		    tervezésétábrázolják jobban látható módon, szoftverekről és programkódokról is.
+
+Az UML osztálydiagrammunk elkészítéséhez a Visual Paradigm programot fogjuk használni. A programkódunkat automatikusan URl osztálydiagramma tudjuk változtatni a Tools/Code/Instant Reverse-re kattintva. Ezután felugrik egy ablak majd meg kell adjuk a forráskód nyelvét, és az elérési útvonalát, majd kiválasztjuk az osztályokat.
+
+
+
+        </para>
+    </section>        
+
+    <section>
+        <title>Forward engineering UML osztálydiagram</title>
+        <para>
+            UML-ben tervezzünk osztályokat és generáljunk belőle forrást!
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása:                
+        </para>
+        <para>
+            Az előző feladatohoz hasonlóan az UML osztálydiagrammokkal kell foglalkoznunk, és itt is a Visual Paradigm programot fogjuk használni. Itt viszont most az fog változni,előzőhöz képest, hogy megfordítjuk a menetet, és most az UML diagrammból fogunk kódot csinálni.
+ Létrehozunk egy uj classt.
+Itt tudunk majd forrást generalni ezt legegyszerűbben az előzőhöz hasonlóan a Code
+Generation Wizard-al tudjuk itt ki kell valasztanunk a helyet, hogy hova mentsen és azt, hogy milyen nyelven akarjuk a kódot
+Ha C++-t választottunk 2 fajlt fogunk kapni egy headert(.h) es egy forrás (.cpp)fajlt .
+        </para>
+    </section>        
+        
+<section>
+        <title>Egy esettan</title>
+        <para>
+	A BME-s C++ tankönyv 14. fejezetét (427-444 elmélet, 445-469 az esettan) dolgozzuk fel!
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása:                
+        </para>
+        <para>
+            Tanulságok, tapasztalatok, magyarázat...
+        </para>
+    </section> 
+
+<section>
+        <title>BPMN</title>
+        <para>
+	Rajzoljunk le egy tevékenységet BPMN-ben!
+https://arato.inf.unideb.hu/batfai.norbert/UDPROG/deprecated/Prog2_7.pdf (34-47 fólia)
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása:                
+        </para>
+        <para>
+            A BPMN vagyis "Business Process Model and Notation " ami egy álltalában üzleti folyamatok és modellek ábrázolására használt grafiukus ábrázolás.
+Az én általam csinált ilyen ábra, az éhséggel fog foglalkozni. Először is jön, hogy éhesek vagyunk, ha nem teljesül nem történik semmi, ha viszont igen akkor továbblépünk, arra , hogy valami élelmiszert kell szereznünk, erre van több megoldásunk is, vagy elmenni valamilyen ételt felszolgáló helyre vagy bevárásrolni alapanyagokat. Ha azt választjuk, hogy elmegyunk enni, akkor megvesszük, elfogyasztjuk és már meg is vagyunk. Ha viszont van betudunk vásárolni is, akkor bevásárolunk, előkészítjük az ételt, majd megesszük. Ez után az éhségünk is el fog múlni.
+        </para>
+<para>
+<mediaobject>
+                <imageobject>
+                    <imagedata fileref="/images/BPMN.png" scale="40"/>
+                </imageobject>
+            </mediaobject>
+</para>
+<para>
+Ezt a ábrát a draw.io segítségével készítettem, amivel nagyon egyszerű hasonló diagramot csinálni.
+</para>
+
+    </section> 
+
+<section>
+        <title>TeX UML</title>
+        <para>
+	Valamilyen TeX-es csomag felhasználásával készíts szép diagramokat az OOCWC projektről (pl.
+use case és class diagramokat).
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása:                
+        </para>
+        <para>
+            Tanulságok, tapasztalatok, magyarázat...
+        </para>
+    </section> 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+</chapter>                
