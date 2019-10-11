@@ -61,7 +61,8 @@ https://www.tankonyvtar.hu/hu/tartalom/tkt/javat-tanitok-javat/apas03.html#id561
             Megoldás videó:
         </para>
         <para>
-            Megoldás forrása:                
+            Megoldás forrása: https://github.com/Drcsonka/Prog2/blob/master/antioo.java
+			https://github.com/Drcsonka/Prog2/blob/master/antioo.c               
         </para>
         <para>
             Ehhez a feladathoz a mar megcsinalt, BPP algoritmust fogjuk hasznalni, csak most a feladatunk az lesz, hogy a PI-nek kell a 10^6 10^7 10^8 darab jegyet kiszamolnunk és megkell néznünk, hogy melyik nyelvben milyen gyorsan tudja ezt a feladatot megoldani és kiszamolni ( Ezek a nyelvek a "C, C++, Java, C#").
