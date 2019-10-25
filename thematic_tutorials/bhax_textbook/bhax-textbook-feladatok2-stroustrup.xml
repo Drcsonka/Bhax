@@ -7,8 +7,58 @@
     </info>
 
     <section>
-        <title>A BPP algoritmus Java megvalósítása</title>
+        <title>JDK osztályok</title>
         <para>
+Írjunk olyan Boost C++ programot (indulj ki például a fénykardból) amely kilistázza a JDK összes
+osztályát (miután kicsomagoltuk az src.zip állományt, arra ráengedve)!
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása:                
+        </para>
+        <para>
+            
+Ebbem a feladatban az lesz a dolgunk, hogy a boost segítségével írnunk kell egy olyan C++ programot amely kiírja minden java-s fájlt a könyvárban. A boost használatához nagy segítség volt a weboldalan található tutorial. Nem fogunk jelen esetben egy teljesen új programot írni, hanem fel fogjuk használni a fénykard-ot, és ezt fogjuk kedvünkre módosítani.
+A programunk elején, azt nézzük meg helyesen van-e az argumentum megadva, mivel a keresni kivánt mappát így adjuk meg, szóval ha hiányzik vagy nem megfelelően van megadvan akkor hibát adunk vissza. Ha mappát talál, és a többi argumentum is megfelel, akkor továbblép a program és a "readacts" metódus fog müködésbe lépni, ami azt fogja csinálni, hogy megnézni a mappa argumentumot ( "boost::filesystem::path") . A mappában való válogatástt már a "!ext.compare ( boost::filesystem::extension ( path ) ) )" fogja, megnézni, hogy .java kiterjesztésű-e a fájl, és ha igen akkor félrerakjuk. Majd mikor végzett a programunk az elemzés részével, kiíratjuk a félrerakott fájlneveket. 
+
+        </para>
+    </section>        
+
+    <section>
+        <title>Másoló-mozgató szemantika</title>
+        <para>
+           Kódcsipeteken (copy és move ctor és assign) keresztül vesd össze a C++11 másoló és a mozgató
+szemantikáját, a mozgató konstruktort alapozd a mozgató értékadásra!
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása:                
+        </para>
+        <para>
+            
+
+Hasonló feladattal már foglalkoztunk régebben. Ott egy egyszerűbb verziót használtunk ami csak 
+sekély másolásra képes, de mivel nekünk ez most nem lesz elég így mélymásolásra lesz szükségünk. Ez a mélymásolás igazából megkettőzi az eredeti binfankat, ami előtt le kell foglalnunk a memória területet.
+Akkor lenne sekély másolás ha nem megkettőznénk hanem csak megosztaná a két objetkum egymás között az adatokat.
+A másolásunknál, nem csak egy egyszerű másolás megy végre, hanem egy mozgatás mivel, az eredeti helyünk ki fog ürülni, és az új helyre fog minden adat mozogni. Ez például úgy fog működni, hogy itt nem csak egy jobbérték referenciát adunk vissza a move függvénnyel hanem egy új fa gyökerét és ennek a gyerekei a régi egyes nullás gyermekei lesznek, és a régi gyerekek egy nullpointerre fognak mutatni.
+
+
+
+
+
+        </para>
+    </section>   
+
+<section>
+        <title>Hibásan implementált RSA törése</title>
+        <para>
+Készítsünk betű gyakoriság alapú törést egy hibásan implementált RSA kódoló:
+https://arato.inf.unideb.hu/batfai.norbert/UDPROG/deprecated/Prog2_3.pdf (71-73 fólia) által
+készített titkos szövegen.
         </para>
         <para>
             Megoldás videó:
@@ -21,10 +71,12 @@
         </para>
     </section>        
 
-    <section>
-        <title>Java osztályok a Pi-ben</title>
+<section>
+        <title>Változó argumentumszámú ctor</title>
         <para>
-            Az előző feladat kódját fejleszd tovább: vizsgáld, hogy Vannak-e Java osztályok a Pi hexadecimális kifejtésében!
+Készítsünk olyan példát, amely egy képet tesz az alábbi projekt Perceptron osztályának bemenetére
+és a Perceptron ne egy értéket, hanem egy ugyanakkora méretű „képet” adjon vissza. (Lásd még a 4
+hét/Perceptron osztály feladatot is.)
         </para>
         <para>
             Megoldás videó:
@@ -33,9 +85,11 @@
             Megoldás forrása:                
         </para>
         <para>
-            Tanulságok, tapasztalatok, magyarázat...
+
+Ehhez a feladathoz is a mandelbrot programunkat fogjuk segitsegul hasznalni, es ezzel fogunk dolgozni, mar prog 1-ben is és a múltheti feladatban is perceptronnal foglalkoztunk. A mostani feladatban viszont az lesz a különbségünk, hogy a perceptronunk nem csak egy értéket számolunk vel hanem egy képet szeretnénk kapni, visszatérési értéknek. A képünk magasság*szélesség mennyiségű értékből fog állni. De ezek az értékek is ugyan úgy mint a régebbi feladatban a [0,1] intervallumból kapnka. Az operátorfüggvényünkben nem csak egy értéket ad vissza hanem egy tombot, vagy akar vektort is igy, ha tömbről beszélünk double*-ot kell használnunk.
+
         </para>
-    </section>        
+    </section>             
         
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
 </chapter>                

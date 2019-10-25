@@ -1,14 +1,15 @@
 <chapter xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xi="http://www.w3.org/2001/XInclude" version="5.0" xml:lang="hu">
     <info>
-        <title>Helló, Arroway!</title>
+        <title>Helló, Chomsky!</title>
         <keywordset>
             <keyword/>
         </keywordset>
     </info>
 
     <section>
-        <title>A BPP algoritmus Java megvalósítása</title>
+        <title>Encoding</title>
         <para>
+	Fordítsuk le és futtassuk a Javat tanítok könyv MandelbrotHalmazNagyító.java forrását úgy, hogy a fájl nevekben és a forrásokban is meghagyjuk az ékezetes betűket! https://www.tankonyvtar.hu/hu/tartalom/tkt/javat-tanitok-javat/adatok.html
         </para>
         <para>
             Megoldás videó:
@@ -17,14 +18,60 @@
             Megoldás forrása:                
         </para>
         <para>
-            Tanulságok, tapasztalatok, magyarázat...
+             A java előnye, hogy itt nincs azzal problemánk a magyar betűket nem tudná feldolgozni, mivel nagyon sok karakterkészlet hasznátará képes beleértve a nekünk szükséges ISO-8859-est. 
+Ezzel a programmal már foglalkoztunk Prog1-en, így már ismerjük, de problémánk a mandelbrot lefuttatásával lesz mivel ez is magyar karatktereket tartalmaz, de ezt könnyen ki tudjuk küszöbölni a "--encoding" kapcsóló használatával, ami azt fogja eredmenyézni, hogy mi tudjuk megszabni, hogy milyen karakterkészletet használjon a program.
+
         </para>
     </section>        
 
     <section>
-        <title>Java osztályok a Pi-ben</title>
+        <title>OOCWC lexer</title>
         <para>
-            Az előző feladat kódját fejleszd tovább: vizsgáld, hogy Vannak-e Java osztályok a Pi hexadecimális kifejtésében!
+            Izzítsuk be az OOCWC-t és vázoljuk a https://github.com/nbatfai/robocaremulator/blob/master/justine/rcemu/src/carlexer.ll lexert és kapcsolását a programunk OO
+struktúrájába!
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása:                
+        </para>
+        <para>
+
+
+
+Prog1-en már foglalkoztunk Lexerrel, röviden a lexer feladat, hogy szöveget elemezzen, és a programok készítése előre megadott szabályok alapján.
+Ebben a feladatban egy carlex-errel fogunk dolgozni.
+A feladat részeket itt "%" jelekkel válasszuk el. 
+Az első részben megadjuk a definíciókat és a konstansokat, mint peldaul útvonal, pozíció, gangsterek. Az itt kapott pozició értékekkel fogjuk meghatározni a kocsink koordinátáit.
+A következő feladatrészben majd a lexernek irunk, szavakat amiket itt elfog fogadni.
+Majd meghívjuk a CarLexer file-t. 
+          
+
+
+        </para>
+    </section>  
+<section>
+        <title>Paszigráfia Rapszódia OpenGL full screen vizualizáció</title>
+        <para>
+           Lásd vis_prel_para.pdf! Apró módosításokat eszközölj benne, pl. színvilág, textúrázás, a szintek jobb
+elkülönítése, kézreállóbb irányítás.
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása:                
+        </para>
+        <para>
+            Arról, hogy mi is ez a Pasziográfia Rapszódia, a vis_prel_para doksiban olvashatunk részletesebben. Röviden összegezve pedig az esport mesterségesen kialakított nyelve, mivel a humunkulusz és a mesterséges humunkulsz között próbál meg kapcsolatot/kommunikációt kialakítani. Ez egy harmadlagos fejlesztendő nyelv pontosan, amely az esport játékba van beágyazva. A feladatban pedig konkrétan a vizualizációval tudunk szórakozni. Visszatérve a humunkuluszra pedig, ezt Neumann nevéhez köthetjük, és ennek a létrejöttéhez szükséges a központi idegrendszer, valamint a donaldi külső memória, illetve az ezekből kiinduló elméleti háttér. Ez az egész elmélet lényegében a komplexitás méréséről szól, tehát az idegrendszer és a külső memória, vagy akár a humunkulusz és a mesterséges humunkulusz komplexitását is össze tudja hasonlítani, és ami fontos neki, az az, hogy a humunkulusz által létrehozott mesterséges humunkulusz összehasonlítható legyen, vagy akár a mesterséges meghaladja a létrehozóét is. Nos ez lett volna az elméleti háttér röviden. Ha pedig ki szeretnénk próbálni, akkor először telepítenünk kell az opengl-t, és a további szükséget csomagokat. A fordítás futtatás a forrásban már szintén megtalálható, utóbbihoz még 6 darab képre van szükségünk, másra már nem. És valami ilyesmi eredményt kapunk ekkor.
+
+        </para>
+    </section> 
+<section>
+        <title>Paszigráfia Rapszódia LuaLaTeX vizualizáció</title>
+        <para>
+            Lásd vis_prel_para.pdf! Apró módosításokat eszközölj benne, pl. színvilág, még erősebb 3D-s hatás.
         </para>
         <para>
             Megoldás videó:
@@ -35,7 +82,28 @@
         <para>
             Tanulságok, tapasztalatok, magyarázat...
         </para>
-    </section>        
+    </section> 
+<section>
+        <title>Perceptron osztály</title>
+        <para>
+            Dolgozzuk be egy külön projektbe a projekt Perceptron osztályát!
+Lásd https://youtu.be/XpBnR31BRJY
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása:                
+        </para>
+        <para>
+            
+	Ebben a feladatban is a mandelbrot programunkat fogjuk használni mivel közel összeköttetésben van a két program. Egy kétdimenziós képet fogunk legenerálni, aminek PNG formátuma lesz. A program futása előtt le kell töltenünk plusz tartozékokat, mint például a libpng-t, igy müködni fog a kép generálás. Majd futtatjuk a programot, és legeneráluk a képünket. A kapott kepünket fogjuk később felhasználni. A perceptron osztály headerjeben alkalmunk adódik megadni a rétegek, és neuronok számát is. Az előbb generáált képet most beimportáljuk, és a piros részeket a legoflalt tárba másoljuk be, majd új képet állítunk elő aminek a magassága és a szélessége megfog felelni az előző képhez, és az innen visszakapott értéket kék értékként fogjuk hasaználni. 
+
+
+
+
+</para>
+    </section>       
         
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
 </chapter>                
