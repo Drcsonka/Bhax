@@ -1,14 +1,16 @@
 <chapter xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xi="http://www.w3.org/2001/XInclude" version="5.0" xml:lang="hu">
     <info>
-        <title>Helló, Arroway!</title>
+        <title>Helló, Godel!</title>
         <keywordset>
             <keyword/>
         </keywordset>
     </info>
 
     <section>
-        <title>A BPP algoritmus Java megvalósítása</title>
+        <title>Gengszterek</title>
         <para>
+Gengszterek rendezése lambdával a Robotautó Világbajnokságban
+https://youtu.be/DL6iQwPx1Yw (8:05-től)
         </para>
         <para>
             Megoldás videó:
@@ -17,14 +19,150 @@
             Megoldás forrása:                
         </para>
         <para>
-            Tanulságok, tapasztalatok, magyarázat...
+            A Robotautó Világbajnokság célja a forgalomirányítási algoritmusok kutatása és a self driving cars vagyis a "robotautók" elterjedésének vizsgálata.
+       
+Először le kell rántanunk a <link xlink:href="https://github.com/nbatfai/robocar-emulator">GitHub projektet</link>.
+A C++11-ben megjelenő "lambda" kifejezések által egy vagy többsoros névtelen függvényeket definiálhatunk a kódunkban.
+
+
+Általános alakja:
+<programlisting language="C++"><![CDATA[
+[](int x, int y) { return x + y; }]]>
+</programlisting>
+
+ Az elején a szögletes zárójelpár azt jelzi, hogy egy "lambda" kifejezés következni. A sima zárójel függvényhívást fog jelenteni. 
+
+
+<programlisting language="java"><![CDATA[
+            std::sort ( gangsters.begin(), gangsters.end(), [this, cop] ( Gangster x, Gangster y )
+            {
+                return dst ( cop, x.to ) < dst ( cop, y.to );
+            } );
+            ]]>
+          </programlisting>
+
+A sort függvényt fogjuk használni, de mivel számunkra nem lesz elég a szimpla verziója, így a 3 argumentumos, nehezebb verzióját kell használnunk, és a gangster objektumot fogjuk vele rendezni. Es a rendezés a rendőrtől vagyis a "cop"-tól való távolságon fog alapulni, növekvő sorrendben.
+        
         </para>
     </section>        
 
     <section>
-        <title>Java osztályok a Pi-ben</title>
+        <title>C++11 Custom Allocator</title>
         <para>
-            Az előző feladat kódját fejleszd tovább: vizsgáld, hogy Vannak-e Java osztályok a Pi hexadecimális kifejtésében!
+            https://prezi.com/jvvbytkwgsxj/high-level-programming-languages-2-c11-allocators/ a
+CustomAlloc-os példa, lásd C forrást az UDPROG repóban!
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása:                
+        </para>
+        <para>
+            <programlisting>template&lt;typename T>
+class CustomAlloc
+{
+public:
+    CustomAlloc() {}
+    CustomAlloc(const CustomAlloc&amp;) {}
+    ~CustomAlloc() {}
+
+    using pointer = T*;
+    using value_type = T;
+
+    using const_pointer = const T*;
+
+    using size_type = size_t;
+    using reference = T&amp;;
+    using const_reference = const T&amp;;
+    using difference_type = ptrdiff_t;
+
+    pointer allocate( size_type n){
+        int s;
+        char* p = abi::__cxa_demangle( typeid (T).name(), 0, 0, &amp;s);
+        std::cout &lt;&lt; "Allocating "
+                  &lt;&lt; n &lt;&lt; " objects of "
+                  &lt;&lt; n*sizeof (T)
+                  &lt;&lt; " bytes. "
+                  &lt;&lt; typeid (T).name() &lt;&lt; "=" &lt;&lt; p
+                  &lt;&lt; std::endl;
+        delete p;
+        return reinterpret_cast&lt;T*>(new char[n*sizeof(T)]);
+    }
+
+    void deallocate (pointer p, size_type n){
+        delete[] reinterpret_cast&lt;char *>(p);
+        std::cout &lt;&lt; "Deallocating "
+                  &lt;&lt; n &lt;&lt; " objects of "
+                  &lt;&lt; n*sizeof (T)
+                  &lt;&lt; " bytes. "
+                  &lt;&lt; typeid (T).name() &lt;&lt; "=" &lt;&lt; p
+                  &lt;&lt; std::endl;
+
+    }
+};</programlisting>
+        </para>
+        <para>Az allokátorok lényege igazából az, hogy egy típus számára szükséges memóriát
+            lefoglaljon, illetve ide lehet téríteni a szükségtelen helyet a memóriában.</para>
+        <para>A couttal ebbe a példába rakunk nyomkövetést, ami minden allokáció és deallokáció
+            esetén megmondja az objektumok számát és méretét.</para>
+
+    </section>        
+        
+<section>
+        <title>STL map érték szerinti rendezése</title>
+        <para>
+Például: https://github.com/nbatfai/future/blob/master/cs/F9F2/fenykard.cpp#L180
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása:                
+        </para>
+        <para>Az STL (Standart Template Library) egy olyan könyvtár, mely tárolókat, és
+            algoritmusokat tartalmaz (vector, list, stack, map).</para>
+        <para>A map gyárilag a benne tárolt adatokat növekvő sorrendbe rendezi, és a feladatunk az
+            lenne, hogy ez ne a kulcs alapján történjen, hanem az érték mező szerint.</para>
+        <para>Van egy sort_map függvényünk, a visszatérési értéke egy string, int párokat tartalmazó
+            vektor, erre szolgál a <code>pair</code>, paraméterként a függvény megkapja a
+                <code>map</code> referenciát. Csinálunk egy üres vektort, ez fog string párokat
+            tartalmazni, aztán egy <code>for</code> ciklussal bejárjuk a <code>map</code>-ot, hogy
+            van-e második értékpár, amennyiben van, akkor létrehozunk egy <code>pair</code>
+            adatstruktúrát és a létrehozott párokat tároljuk az ordered vektorba. Meghívjuk a
+                <code>sort</code>-ot az "ordered" vektorra, és rendezzük azt, lambda kifejezés
+            segítségével megadjuk miképpen szeretnénk rendezni az elemeket.(Paraméterei ketto auto
+            típusú jobbérték, visszatérési értéke bool, aminek értékét a p1.second és p2.second 
+            összehasonlítása adj meg)
+        [=] -> a lambda kifejezés másolás útján, nem pedig referenciaként fogja átvenni a változókat.</para>
+        <para>Kód:</para>
+        <programlisting language="c++">
+<![CDATA[
+std::vector<std::pair<std::string, int>> sort_map ( std::map <std::string, int> &rank )
+{
+        std::vector<std::pair<std::string, int>> ordered;
+        for ( auto & i : rank ) {
+                if ( i.second ) {
+                        std::pair<std::string, int> p {i.first, i.second};
+                        ordered.push_back ( p );
+                }
+        }
+        std::sort (
+                std::begin ( ordered ), std::end ( ordered ),
+        [ = ] ( auto && p1, auto && p2 ) {
+                return p1.second > p2.second;
+        }
+        );
+        return ordered;
+}
+]]>
+        </programlisting>
+    </section>
+<section>
+        <title>Alternatív Tabella rendezése</title>
+        <para>
+Mutassuk be a https://progpater.blog.hu/2011/03/11/alternativ_tabella a programban a java.lang
+Interface Comparable<T> szerepét!
         </para>
         <para>
             Megoldás videó:
@@ -35,7 +173,37 @@
         <para>
             Tanulságok, tapasztalatok, magyarázat...
         </para>
-    </section>        
-        
+    </section>
+<section>
+        <title>Prolog családfa</title>
+        <para>
+Ágyazd be a Prolog családfa programot C++ vagy Java programba! Lásd para_prog_guide.pdf!
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása:                
+        </para>
+        <para>
+            Tanulságok, tapasztalatok, magyarázat...
+        </para>
+    </section>
+<section>
+        <title>GIMP Scheme hack</title>
+        <para>
+Ha az előző félévben nem dolgoztad fel a témát (például a mandalás vagy a króm szöveges
+dobozosat) akkor itt az alkalom!
+        </para>
+        <para>
+            Megoldás videó:
+        </para>
+        <para>
+            Megoldás forrása:                
+        </para>
+        <para>
+            Tanulságok, tapasztalatok, magyarázat...
+        </para>
+    </section>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
 </chapter>                
