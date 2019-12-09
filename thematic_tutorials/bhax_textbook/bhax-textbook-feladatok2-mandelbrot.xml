@@ -88,7 +88,7 @@ Az én általam csinált ilyen ábra, az éhséggel fog foglalkozni. Először i
 <para>
 <mediaobject>
                 <imageobject>
-                    <imagedata fileref="/images/BPMN.png" scale="40"/>
+                    <imagedata fileref="images/BPMN.png" scale="50" align="center"></imagedata>
                 </imageobject>
             </mediaobject>
 </para>

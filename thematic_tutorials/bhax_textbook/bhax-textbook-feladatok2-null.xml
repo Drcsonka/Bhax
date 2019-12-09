@@ -9,93 +9,154 @@
     </info>
     <section>
         <title>FUTURE tevékenység editor</title>
-        <para>A feladat az volt, hogy javítsunk valamit a ActivityEditor.java JavaFX programon,
-            keressnk benne bugokat!</para>
-        <para>Az első bug amivel találkoztam, hogy abban az esetben, ha új altevékenységet vagy új
-            altevékenység tulajdonságot hozunk létre, maga az altevékenység/altevékenység
-            tulajdonság létre jön, de ha már még egyet csinálunk, ez nem lehetséges mivel a program
-            automatikusan "Új altevékenység tulajdonságok" vagy "Új altevékenység" nevet adja neki
-            folyton és két ugyan olyan nevű mappa nem lehet egy könyvtárban, így ezt korigáltam,
-            azzal, hogy amikor új altevékenységet vagy új altevékenység tulajdonságot hozunk létre,
-            van arra lehetőségünk, hogy nevet adjunk neki.</para>
+        <para>Javítsunk valamit a ActivityEditor.java JavaFX programon!
+            https://github.com/nbatfai/future/tree/master/cs/F6
+            Itt láthatjuk működésben az alapot: https://www.twitch.tv/videos/222879467</para>
+        <para>A programmal való ismerkedés közben az első bug amivel találtkoztam az az volt, hogy
+            amikor új Altevékenységet hozunk létre nemtudunk mégegyet létrehozni mivel már 1 "Új
+            altevékenység" nevú mappa létezik és 2 ugyan olyan nevű mappa nem létezhet. Erre azt
+            találtam ki, hogy ha az újonnan létrehozott altevékenységek után szúrok egy sorszámot
+            akkor ugymond a végtelenségig lehetne létrehozni altevékenységeket. Ezt úgy oldottam
+            meg, hogy létrehoztam egy új változót ami ebben az esetben a "sorszam" és az új 
+            altevékenység után szurtam, minden egyes beszúrás után növelve az értékét.
+            
+            <programlisting language="java">
+                <![CDATA[
+               int sorszam = 1;
+                while (true) {
+                    java.io.File f = new java.io.File(
+                            file.getPath() + System.getProperty("file.separator") + "Új altevékenység" + sorszam); 
+                    if (f.mkdir()) {
+                        javafx.scene.control.TreeItem<java.io.File> newAct
+                         = new FileTreeItem(f, new javafx.scene.image.ImageView(actIcon));
+                        getTreeItem().getChildren().add(newAct);
+                        break;
+                    } else {
+                        sorszam++;
+                        System.err.println("Cannot create " + f.getPath());
 
-        <mediaobject>
-            <imageobject>
-                <imagedata fileref="_files_/_ _/bug_1.png" scale="60"/>
-            </imageobject>
-        </mediaobject>
-        <para>Ez picit fapados megoldás, de a célnak megfelel, ahoz hogy használni tudjuk a Scanner
-            osztályt importálnunk kell a java.util csomagot (<code>import java.util.Scanner</code>),
-            ez az osztály segít a felhasználótól adatot bekérni, és azzal dolgozni.</para>
+                    }
+                }
+            });
+]]>
+            </programlisting>
+        </para>
+        
+        
+        <para>
+            <programlisting language="java"><![CDATA[
+                private int a = 1;
+        public TextFieldTreeCell(javafx.scene.control.TextArea propsEdit) {
+            this.propsEdit = propsEdit;
+            javafx.scene.control.MenuItem subaMenuItem = new javafx.scene.control.MenuItem("Új altevékenység");//"New subactivity");
+            addMenu.getItems().add(subaMenuItem);
+            subaMenuItem.setOnAction((javafx.event.ActionEvent evt) -> {
+                java.io.File file = getTreeItem().getValue();
+                java.io.File f = new java.io.File(file.getPath() + System.getProperty("file.separator") + "Új altevékenység");
+                
 
-        <programlisting language="java">
-            <![CDATA[        
-        subaMenuItem.setOnAction((javafx.event.ActionEvent evt) -> {
+                if (f.mkdir()) {
+                      javafx.scene.control.TreeItem<java.io.File> newAct
+                           = new FileTreeItem(f, new javafx.scene.image.ImageView(actIcon));                            
+                   getTreeItem().getChildren().add(newAct);
+                } else {
+                     javafx.scene.control.TreeItem<java.io.File> newAct
+                           = new FileTreeItem(f = new java.io.File(file.getPath() + System.getProperty("file.separator") + "Új altevékenység"+" "+ a), new javafx.scene.image.ImageView(actIcon));                            
+                   getTreeItem().getChildren().add(newAct);
+                   a++;
+               }
+  
+            });
+]]>
+            </programlisting>
+            
+        </para>
         
-        java.io.File file = getTreeItem().getValue();
-        
-        System.out.println("Adja meg az új altevékenység nevét: ");
-        Scanner file_nevi = new Scanner(System.in);
-        String file_nev = file_nevi.next(); 
-        
-        java.io.File f = new java.io.File(file.getPath() + System.getProperty("file.separator") + file_nev);            ]]>
-     </programlisting>
-        <para>Ugyan ezzel a módszerrel módosítjuk a kódot a altevékenység tulajdonságok résznél
-            is.</para>
     </section>
 
     <section>
         <title>OOCWC Boost ASIO hálózatkezelése</title>
         <para>Mutassunk rá a scanf szerepére és használatára! https://github.com/nbatfai/robocar-
             emulator/blob/master/justine/rcemu/src/carlexer.ll</para>
-        <para>Eza feladat egy inputstream adatainak feldolgozását mutatja be, ezáltal
-            megismerkedhetünk a streamekkel.</para>
-        <programlisting language="java">
-            <![CDATA[
-              while ( std::sscanf ( data+nn, "<OK %d %u %u %u>%n", &idd, &f, &t, &s, &n ) == 4 )
-                {
-                    nn += n;
-                    gangsters.push_back ( Gangster {idd, f, t, s} );
-                } ]]>
-     </programlisting>
-        <para>Az sscanf formázott stringből olvas be, itt azért van szükség erre a whilera mert nem
-            tudjuk pontosan hány gengster adatot tudunk beolvasni, ezért ellenőrini kell az adatok
-            érvényességét. A whileban a sscanf visszatérési értékét (beolvasott paraméterek száma),
-            és a négyet hasonlítjuk össze, azaz ha ez az egyenlőség igaz, minden gangster adatát
-            sikresen beolvastuk. Létrehozunk egy üj gangster objektumot, amit bele rakunk a gangster
-            vectorba, az nn változó az eddig beolvasott adatok számát tárolja, erre a data karakter
-            tömb miatt van szükség, hogy ne olvassuk be belőlle kétszer ugyan azt az adatot.</para>
+        
+        
+        <para> 
+            A "scanf()" funkció egy bemeneti folyamot figyeli és keres benne meghatározott formátumokat.
+            A feladatban a "sscanf()"-et használjuk ami stringeből fog beolvasni.
+            A program elején megadjuk, hogy miket keresünk majd és ezeknek a jelentését:
+        </para>
+        <para>
+            <programlisting>
+                <![CDATA[
+INIT	"<init"
+INITG	"<init guided"
+WS	[ \t]*
+WORD	[^-:\n \t()]{2,}
+INT	[0123456789]+
+FLOAT	[-.0123456789]+
+ROUTE	"<route"
+CAR	"<car"
+POS	"<pos"
+GANGSTERS	"<gangsters"
+STAT	"<stat"
+DISP	"<disp>"
+]]>
+            </programlisting>
+        </para>
+        <para>
+            
+            
+            
+            
+            A scanf függvény képes bejövő stringek beolvasására, és ezek eltárolására a megadott változókba. Visszatérési
+            értéke a sikeresen beolvasott változók száma. </para>
+        
+        
+       
+        <programlisting language="c++">
+            <![CDATA[ 
+        {POS}{WS}{INT}{WS}{INT}{WS}{INT}	{
+					                         std::sscanf(yytext, "<pos %d %u %u", &m_id, &from, &to);
+					                         m_cmd = 10001;
+					                        }
+]]>
+        </programlisting>
+        
+        <para>
+            
+            Mint itt látjuk a "yytext"-et scanneljuk, és előtte hogy miket keresünk benne.
+        </para>
+        
     </section>
 
     <section>
         <title>BrainB</title>
         <para>Mutassuk be a Qt slot-signal mechanizmust ebben a projektben:
             https://github.com/nbatfai/esport- talent-search</para>
-        <para>A BrainBvel már foglalkoztunk, ez egy olyan program ami azt szimulálja mikor egy játék
-            közben nagy a katyvasz, és szinte eltűnik a karakterünk, a szimuláció 10 percnyi időn
-            belül teszteli mennyire tudjuk követni a Samu Entropy négyzetet, a futás végén kapunk
-            egy statisztikát.</para>
-        <para>Haználata:</para>
-        <programlisting language="java">
+        <para>Ezzel a feladattal már foglalkoztunk korábban, a lényege, hogy van egy karakterünk (Samu)
+            akit az egér segítségével követnünk kell de folyamatosan jelennek meg "New Entity"-k 
+            amik nehezítik Samu megtalálását és követését ezzel a feladatunkat is majd az alapján
+            hogy mennyire vagyunk pontosak 10 perc alatt a program majd csinál belőle egy statisztikát.
+        </para>
+        <para>A most feladatunk az, hogy mutassuk be a Slot-signalt Qt-ban. A slot-signal mechanizmus
+            úgy működik, hogy objektumokat kapcsol össze. Először is a kapcsolni tervezett részt emit-eljük
+            például így:
+        </para>
+        <para>
+            <programlisting language="java">
             <![CDATA[
-            sudo apt-get install libqt4-dev
-            sudo apt-get install opencv-data
-            sudo apt-get install libopencv-dev
-            
-            qmake BrainB.pro
-            make
-            ./BrainB
+        }
+        emit endAndStats ( endTime );
+        }
                  ]]>
      </programlisting>
-
-        <para>Most tekintsük meg a slot-signal mechanizmust, Qt-ban a slot-signal mechanizmust,
-            objektumok közöti kommunikációra lehet használni. Egy slot akkor hívódik meg amikor egy
-            signal bekövetkezik, a signal pedig akkor következik be, ha egy bizonyos esemény
-            bekövetkezik, ezzel elkerülődik a cross reference, mivel nem kell egy osztályon belül
-            egy másik osztályt meghívni. A slotok a signalokhoz, connect függvénnyel kapcsolódnak
-            (szignaturáiknak meg kell egyezniük), itt két connectet figyelhetünk meg.</para>
-
-        <programlisting language="java">
+        </para>
+        <para>
+            Így, majd megtudjuk máshol hívni/összekapcsolni.
+            Ha valamivel össze akarjuk kapcsolni, akkor szükségünk lesz egy "connect"-re
+            amik így fognak kinézni a feladatunkba:
+            
+            <programlisting language="java">
             <![CDATA[
      connect ( brainBThread, SIGNAL ( heroesChanged ( QImage, int, int ) ),
     this, SLOT ( updateHeroes ( QImage, int, int ) ) );
@@ -103,13 +164,28 @@
     this, SLOT ( endAndStats ( int ) ) );
                  ]]>
      </programlisting>
+            
+            Látjuk is hogy az "endAndStat" ott szerepel amit az előbb emiteltünk. Mivel azt az 
+            objektumot egy hozzá hasonlóval fogjuk összekapcsolni így amikor a connect-eltet meghívjuk
+            a SLOT-ba rakott objektum is le fog futni, például maradva a "endAndStat"-os példánál
+        </para>
+            <para>
+                
+                <programlisting language="java">
+            <![CDATA[
+    connect ( brainBThread, SIGNAL ( endAndStats ( int ) ),
+    this, SLOT ( endAndStats ( int ) ) );
+                 ]]>
+     </programlisting>
+            </para>
+        
+        <para>
+            Mint itt látjuk a brainBThread-ből vesszük az "endAndStats"-ot és amikor ezt meghívjuk
+            a BrainBwin-ben lévő "endAndStats"-unk is le fog vele futni.
+        </para>
+        <para>
 
-        <para>Azt jelenti, hogya brainBthread-ben a heroesChanged signal bekövetkezik akkor lefut a
-            BrainBWin update-Heroes függvénye, endAndStats esetén ugyanígy, ami a futási idő
-            lejártakor következik be, aminek köszönhetően, kiiródik a debug üzenet, hogy vége a
-            játéknak:</para>
-
-        <programlisting language="java">
+            <programlisting language="java">
             <![CDATA[
         void BrainBThread::run()
         {
@@ -125,8 +201,9 @@
         }
                  ]]>
      </programlisting>
-
-        <programlisting language="java">
+            </para>
+            <para>
+            <programlisting language="java">
             <![CDATA[
         void BrainBWin::endAndStats ( const int &t )
         {
@@ -140,10 +217,6 @@
         }
                  ]]>
      </programlisting>
-        <mediaobject>
-            <imageobject>
-                <imagedata fileref="_files_/_ _/BB.png" scale="40"/>
-            </imageobject>
-        </mediaobject>
+            </para>
     </section>
 </chapter>

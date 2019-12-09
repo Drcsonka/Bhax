@@ -13,37 +13,27 @@ Gengszterek rendezése lambdával a Robotautó Világbajnokságban
 https://youtu.be/DL6iQwPx1Yw (8:05-től)
         </para>
         <para>
-            Megoldás videó:
-        </para>
-        <para>
             Megoldás forrása:                
         </para>
-        <para>
-            A Robotautó Világbajnokság célja a forgalomirányítási algoritmusok kutatása és a self driving cars vagyis a "robotautók" elterjedésének vizsgálata.
-       
-Először le kell rántanunk a <link xlink:href="https://github.com/nbatfai/robocar-emulator">GitHub projektet</link>.
-A C++11-ben megjelenő "lambda" kifejezések által egy vagy többsoros névtelen függvényeket definiálhatunk a kódunkban.
-
-
-Általános alakja:
-<programlisting language="C++"><![CDATA[
+        <para> A Robotautó Világbajnokság célja a forgalomirányítási algoritmusok kutatása és a self
+            driving cars vagyis a "robotautók" elterjedésének vizsgálata. A C++11-ben megjelenő
+            "lambda" kifejezések által egy vagy többsoros névtelen függvényeket definiálhatunk a
+            kódunkban. Általános alakja: <programlisting language="C++"><![CDATA[
 [](int x, int y) { return x + y; }]]>
-</programlisting>
-
- Az elején a szögletes zárójelpár azt jelzi, hogy egy "lambda" kifejezés következni. A sima zárójel függvényhívást fog jelenteni. 
-
-
-<programlisting language="java"><![CDATA[
+</programlisting> Az elején a szögletes zárójelpár azt jelzi,
+            hogy egy "lambda" kifejezés következni. A sima zárójel függvényhívást fog jelenteni. <programlisting language="java"><![CDATA[
             std::sort ( gangsters.begin(), gangsters.end(), [this, cop] ( Gangster x, Gangster y )
             {
                 return dst ( cop, x.to ) < dst ( cop, y.to );
             } );
             ]]>
-          </programlisting>
-
-A sort függvényt fogjuk használni, de mivel számunkra nem lesz elég a szimpla verziója, így a 3 argumentumos, nehezebb verzióját kell használnunk, és a gangster objektumot fogjuk vele rendezni. Es a rendezés a rendőrtől vagyis a "cop"-tól való távolságon fog alapulni, növekvő sorrendben.
-        
-        </para>
+          </programlisting> A sort függvényt fogjuk használni ebben a példában,
+            aminek van 2 és 3 paraméteres változata is, ebben az esetben a 3 paraméterest fogjuk
+            használni mégpedig az első paraméter lesz a "gangsters.begin()" a második a
+            "gangsters.end()", ami az első gangster elemének az indexet és az utolsóját fogja
+            megadni. A "sort" függvényünk 3. tagja a "cop"-al kezdődik és a másik 2 értékünk két
+            gangster oszályú objektum ami alapján megnézzük a "cop"-tól való távolságukat és növekvő
+            sorrendbe rendezzük ezeket.</para>
     </section>        
 
     <section>
@@ -53,33 +43,113 @@ A sort függvényt fogjuk használni, de mivel számunkra nem lesz elég a szimp
 CustomAlloc-os példa, lásd C forrást az UDPROG repóban!
         </para>
         <para>
-            Megoldás videó:
-        </para>
-        <para>
             Megoldás forrása:                
         </para>
         <para>
-            <programlisting>template&lt;typename T>
+            <programlisting language="C++">
+                <![CDATA[ 
+#include <stddef.h>
+            #include <cxxabi.h>
+            #include <iostream>
+            #include <vector>
+template<typename T>
 class CustomAlloc
 {
 public:
     CustomAlloc() {}
-    CustomAlloc(const CustomAlloc&amp;) {}
+    CustomAlloc(const CustomAlloc&) {}
     ~CustomAlloc() {}
 
     using pointer = T*;
+    
     using value_type = T;
-
+    
     using const_pointer = const T*;
-
+    
     using size_type = size_t;
-    using reference = T&amp;;
-    using const_reference = const T&amp;;
+    
+    using reference = T&;
+    
+    using const_reference = const T&;
+    
     using difference_type = ptrdiff_t;
 
     pointer allocate( size_type n){
         int s;
-        char* p = abi::__cxa_demangle( typeid (T).name(), 0, 0, &amp;s);
+        char* p = abi::__cxa_demangle( typeid (T).name(), 0, 0, &s);
+        std::cout << "Allocating "
+                  << n << " objects of "
+                  << n*sizeof (T)
+                  << " bytes. "
+                  << typeid (T).name() << "=" << p
+                  << std::endl;
+        delete p;
+        return reinterpret_cast<T*>(new char[n*sizeof(T)]);
+    }
+
+    void deallocate (pointer p, size_type n){
+        delete[] reinterpret_cast<char *>(p);
+        std::cout << "Deallocating "
+                  << n << " objects of "
+                  << n*sizeof (T)
+                  << " bytes. "
+                  << typeid (T).name() << "=" << p
+                  << std::endl;
+
+    }
+};
+
+            
+            int main(int argc, char* argv[]) {
+            
+              std::vector<int, CustomAlloc<int>> v;
+            
+              v.push_back(1);
+              v.push_back(2);
+              v.push_back(3);
+              v.push_back(4);
+              v.push_back(5);
+              v.push_back(6);
+              v.push_back(7);
+              v.push_back(8);
+              return 0;
+            }]]>
+</programlisting>
+        </para>
+        <para>
+        Egy objektum példányosításakor a memóriában lefoglalódik az ahhoz szükséges terület, C++-ban
+        a "new" operátor használjuk ami meghívja az alapértelmezett allokátort.
+        Ez teljesen megfelel a normális használatra de ha bele szeretnénk szolni a folyamatban 
+        és a memóriakezelésben akkor saját allokátort kell készítenünk ezt a "CustomAlloc" oszállyal fogjuk megvalósítani.
+        </para>
+        <para>
+        <programlisting>
+            CustomAlloc() {}
+        </programlisting>
+        </para>
+        <para>
+            Ezután a "using"-ot fogjuk használni ezzel nevet adva például a pointernek ami itt a "T*" lesz, vagy például a "size_typenak" "size_t"
+        </para>
+        <para>
+            <programlisting>
+                using pointer = T*;
+                
+                using size_type = size_t;
+                </programlisting>
+        </para>
+        <para>
+            <programlisting>
+            pointer allocate( size_type n){
+        int s;
+                </programlisting>
+        </para>
+        <para>
+            Az "allocate" funkciónk egy pointert fog vissza adni aminek a paramétere 
+            "size_type" lesz ami majd a szükséges memóriaterületet fogja lefoglalni.
+        </para>
+        <para>
+            <programlisting>
+                char* p = abi::__cxa_demangle( typeid (T).name(), 0, 0, &amp;s);
         std::cout &lt;&lt; "Allocating "
                   &lt;&lt; n &lt;&lt; " objects of "
                   &lt;&lt; n*sizeof (T)
@@ -88,9 +158,16 @@ public:
                   &lt;&lt; std::endl;
         delete p;
         return reinterpret_cast&lt;T*>(new char[n*sizeof(T)]);
-    }
-
-    void deallocate (pointer p, size_type n){
+            </programlisting>
+        </para>
+        <para>
+            A 'p' változónkban tároljuk el a "__cxa_demangle" funkción belül a "typeid(T).name()" által visszafejtett típus típusazonosítóját.
+            Majd kiíratjuk hogy hány objetumnak foglaltunk helyet és ezt hány bájton tettük meg. 
+            Ezután töröljük a "p"-t és visszatérünk a "T*" által mutatott lefoglalt területre.
+        </para>
+        <para>
+            <programlisting>
+                void deallocate (pointer p, size_type n){
         delete[] reinterpret_cast&lt;char *>(p);
         std::cout &lt;&lt; "Deallocating "
                   &lt;&lt; n &lt;&lt; " objects of "
@@ -100,13 +177,24 @@ public:
                   &lt;&lt; std::endl;
 
     }
-};</programlisting>
+            </programlisting>
         </para>
-        <para>Az allokátorok lényege igazából az, hogy egy típus számára szükséges memóriát
-            lefoglaljon, illetve ide lehet téríteni a szükségtelen helyet a memóriában.</para>
-        <para>A couttal ebbe a példába rakunk nyomkövetést, ami minden allokáció és deallokáció
-            esetén megmondja az objektumok számát és méretét.</para>
-
+        <para>
+            A dellocate-at szabadítjuk majd fel a lefoglalt memóriaterületeket.
+        </para>
+        
+        <para>
+            Végül létrehozunk egy vektort aminek megadjuk a "CustomAlloc" és "push_back()" el teszünk bele egy keveset.
+        </para>
+        
+        <para>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/alloc.png" scale="50" align="center"></imagedata>
+                </imageobject>
+            </mediaobject>
+        </para>
+        
     </section>        
         
 <section>
@@ -114,31 +202,9 @@ public:
         <para>
 Például: https://github.com/nbatfai/future/blob/master/cs/F9F2/fenykard.cpp#L180
         </para>
-        <para>
-            Megoldás videó:
-        </para>
-        <para>
-            Megoldás forrása:                
-        </para>
-        <para>Az STL (Standart Template Library) egy olyan könyvtár, mely tárolókat, és
-            algoritmusokat tartalmaz (vector, list, stack, map).</para>
-        <para>A map gyárilag a benne tárolt adatokat növekvő sorrendbe rendezi, és a feladatunk az
-            lenne, hogy ez ne a kulcs alapján történjen, hanem az érték mező szerint.</para>
-        <para>Van egy sort_map függvényünk, a visszatérési értéke egy string, int párokat tartalmazó
-            vektor, erre szolgál a <code>pair</code>, paraméterként a függvény megkapja a
-                <code>map</code> referenciát. Csinálunk egy üres vektort, ez fog string párokat
-            tartalmazni, aztán egy <code>for</code> ciklussal bejárjuk a <code>map</code>-ot, hogy
-            van-e második értékpár, amennyiben van, akkor létrehozunk egy <code>pair</code>
-            adatstruktúrát és a létrehozott párokat tároljuk az ordered vektorba. Meghívjuk a
-                <code>sort</code>-ot az "ordered" vektorra, és rendezzük azt, lambda kifejezés
-            segítségével megadjuk miképpen szeretnénk rendezni az elemeket.(Paraméterei ketto auto
-            típusú jobbérték, visszatérési értéke bool, aminek értékét a p1.second és p2.second 
-            összehasonlítása adj meg)
-        [=] -> a lambda kifejezés másolás útján, nem pedig referenciaként fogja átvenni a változókat.</para>
-        <para>Kód:</para>
+    <para>
         <programlisting language="c++">
-<![CDATA[
-std::vector<std::pair<std::string, int>> sort_map ( std::map <std::string, int> &rank )
+<![CDATA[std::vector<std::pair<std::string, int>> sort_map ( std::map <std::string, int> &rank )
 {
         std::vector<std::pair<std::string, int>> ordered;
         for ( auto & i : rank ) {
@@ -155,14 +221,23 @@ std::vector<std::pair<std::string, int>> sort_map ( std::map <std::string, int> 
         );
         return ordered;
 }
-]]>
+        ]]>
+	
         </programlisting>
+    </para>
+    <para>
+        A feladatunk az hogy ne a kulcs alapján rendezzünk a "map"-ot hanem az érték mező szerint.
+        Először is létrehozunk egy "pair" vektort ebbe átrakjuk az eddigi adatainkat.
+        Majd ebben a vektorban fogjuk csak rendezni az elemeket lambda kifejezés segítségével 
+        csökkenő sorrendbe, betöltjük az ordered vektorba, és visszaadjuk az "ordered" vektort.
+        
+    </para>
     </section>
 <section>
         <title>Alternatív Tabella rendezése</title>
         <para>
 Mutassuk be a https://progpater.blog.hu/2011/03/11/alternativ_tabella a programban a java.lang
-Interface Comparable<T> szerepét!
+Interface Comparable szerepét!
         </para>
         <para>
             Megoldás videó:
