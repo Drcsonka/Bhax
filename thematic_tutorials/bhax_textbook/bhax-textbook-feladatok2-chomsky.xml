@@ -62,11 +62,11 @@ class Lexer{
 		{"©", "€", "¢", "{"},//c
 		{"d", "|)", "|]", "|}"},//d
 		{"Σ", "Œ", "3", "3"},//e
-		{"╒", "|=", "£", "|#"},//f
+		{"F", "|=", "£", "|#"},//f
 		{"g", "6", "[", "[+"},//g
-		{"♓", "4", "|-|", "[-]"},//h
+		{"]-[", "4", "|-|", "[-]"},//h
 		{"1", "1", "|", "!"},//i
-		{"⌡", "7", "_|", "_/"},//j
+		{"J", "7", "_|", "_/"},//j
 		{"k", "|<", "1<", "|{"},//k
 		{"l", "1", "|", "|_"},//l
 		{"m", "44", "(V)", "|\\/|"},//m
@@ -76,14 +76,14 @@ class Lexer{
 		{"q", "9", "O_", "(,)"},//q
 		{"®", "Γ", "12", "|2"},//r
 		{"s", "5", "$", "$"},//s
-		{"†", "╤", "τ", "'|'"},//t
+		{"†", "T", "τ", "'|'"},//t
 		{"µ", "|_|", "(_)", "[_]"},//u
 		{"v", "\\/", "\\/", "\\/"},//v
 		{"w", "VV", "\\/\\/", "(/\\)"},//w
 		{"x", "%", ")(", ")("},//x
 		{"y", "¥", "", ""},//y
 		{"z", "2", "7_", ">_"},//z
-		{"Ω", "○", "º", "☺"},//0
+		{"Ω", "○", "º", "o"},//0
 		{"I", "I", "L", "L"},//1
 		{"Z", "Z", "Z", "e"},//2
 		{"E", "E", "E", "E"},//3
@@ -348,9 +348,11 @@ Lásd https://youtu.be/XpBnR31BRJY
             összeköttetésben van a két program. Egy kétdimenziós képet fogunk legenerálni, aminek
             PNG formátuma lesz. A program futása előtt le kell töltenünk plusz tartozékokat, mint
             például a libpng-t, igy müködni fog a kép generálás. Majd futtatjuk a programot, és
-            legeneráluk a képünket. </para>
+            legeneráluk a képünket. 
+        </para>
         <para>A kapott kepünket fogjuk később felhasználni. A perceptron osztály headerjeben
-            alkalmunk adódik megadni a rétegek, és neuronok számát is. </para>
+            alkalmunk adódik megadni a rétegek, és neuronok számát is. 
+        </para>
     
     <para>
         
