@@ -20,7 +20,7 @@
 	        <programlisting>
                 <![CDATA[
                 
-public class KapuSzkenner 
+public class Kapu
 {
     
     public static void main(String[] args) 

@@ -43,34 +43,7 @@
         </para>
         
         
-        <para>
-            <programlisting language="java"><![CDATA[
-                private int a = 1;
-        public TextFieldTreeCell(javafx.scene.control.TextArea propsEdit) {
-            this.propsEdit = propsEdit;
-            javafx.scene.control.MenuItem subaMenuItem = new javafx.scene.control.MenuItem("Új altevékenység");//"New subactivity");
-            addMenu.getItems().add(subaMenuItem);
-            subaMenuItem.setOnAction((javafx.event.ActionEvent evt) -> {
-                java.io.File file = getTreeItem().getValue();
-                java.io.File f = new java.io.File(file.getPath() + System.getProperty("file.separator") + "Új altevékenység");
-                
-
-                if (f.mkdir()) {
-                      javafx.scene.control.TreeItem<java.io.File> newAct
-                           = new FileTreeItem(f, new javafx.scene.image.ImageView(actIcon));                            
-                   getTreeItem().getChildren().add(newAct);
-                } else {
-                     javafx.scene.control.TreeItem<java.io.File> newAct
-                           = new FileTreeItem(f = new java.io.File(file.getPath() + System.getProperty("file.separator") + "Új altevékenység"+" "+ a), new javafx.scene.image.ImageView(actIcon));                            
-                   getTreeItem().getChildren().add(newAct);
-                   a++;
-               }
-  
-            });
-]]>
-            </programlisting>
-            
-        </para>
+        
         
     </section>
 

@@ -28,6 +28,103 @@ Aza  feladatunk, hogy csináljunk egy olyan programot ami ezt az elvet sérti.
 A kódunkat nézve, van egy Madar osztályunk, ami tartalmazza a "repules()" funkciót. Ezen kívül létrehozunk két alosztályt ezek lesznek a Madar leszármazott osztályai. Mindketttő osztály ( sas és pingvin ) örökölni fogja a "repules()"-t funkciot. A program szintaktikailag helyes ezzel nincs is baj, de viszont logikailag nem helyes, mert a sas tud repülni, de a pingvin már nem. És így megsértjük a Liskov elvet ami a feladatunk volt.
 Ezt a hibat úgy tudnánk kiküszöbölni, hogy a "Madar" osztályon belül létrehoznank egy "repulomadarak" osztalyt és ez kapna majd meg a "repules()" funkciot. Igy különbséget tudnánk tenni repülő és nem repülő madarak között.
         </para>
+        <para>
+            A programunk javában:
+            <programlisting>
+    <![CDATA[
+                
+class Madar {
+public:
+     virtual void repul() {};
+};
+
+
+class Program {
+public:
+     void fgv ( Madar &madar ) {
+          madar.repul();
+     }
+};
+
+
+class Sas : public Madar
+{};
+
+class Pingvin : public Madar
+{};
+
+int main ( int argc, char **argv )
+{
+     Program program;
+     Madar madar;
+     program.fgv ( madar );
+
+     Sas sas;
+     program.fgv ( sas );
+
+     Pingvin pingvin;
+     program.fgv ( pingvin ); 
+
+}
+
+
+
+
+
+    ]]>
+</programlisting>
+        </para>
+        
+        
+        <para> 
+            A programunk Javában:
+            <programlisting>
+    <![CDATA[
+                
+class Madar 
+{
+	void repul() { };
+};
+class Program 
+{
+     void fgv ( Madar madar ) 
+     {
+          madar.repul();
+     }
+};
+class Sas extends Madar
+{};
+class Pingvin extends Madar 
+{};
+class liskovsert
+{
+public static void main ( String[] args )
+{
+     Program liskov = new Program();
+     Madar madarr = new Madar();
+     liskov.fgv ( madarr );
+     Sas sass = new Sas();
+     liskov.fgv ( sass );
+     Pingvin pingvinn = new Pingvin();
+     liskov.fgv ( pingvinn );
+}
+}
+
+
+    ]]>
+</programlisting>
+        </para>
+        
+        
+        <para>
+            A két programunk futása:
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/liskovsert.png" scale="70" />
+                </imageobject>
+            </mediaobject>
+        </para>
+        
     </section>        
 
     <section>
@@ -48,6 +145,125 @@ https://github.com/Drcsonka/Prog2/blob/master/szulogyermek.cpp
             A feladatunk ebben a programban az lenne, hogy egy szülő-gyermek példát mutassunk be, hasonlóan az előző feladatunkhoz. A programunk rendelkezik egy "teglalap" nevű osztállyal amely rendelkezik egy "meret" nevu funkcioval ami két értéket fog tartalmazni, ami a Szélesség és a Magasság lesz. A "teglalap" osztályunk rendelkezni fog egy "negyzet" nevű alosztállyal.
 Ez az alosztály rendelkezni fog a "terület" nevű függvénnyel. A programunk ott fog elbukni, hogy a futásnál a "terulet" függvényt a téglalapra akarjuk meghívni, de mivel a téglalap osztály nem rendelkezik a "terulet" függvénnyel, így hibába fut és nem fog tudni lefutni.
         </para>
+        
+        <para>
+            A programunk c++-ban:
+            <programlisting>
+    <![CDATA[
+                
+#include <iostream>
+
+class Teglalap
+{
+    public:
+        int m_szelesseg;
+        int m_magassag;
+        
+        Teglalap(int szelesseg, int magassag) {
+            m_szelesseg = szelesseg;
+            m_magassag = magassag;
+        }
+        
+        int getSzelesseg(){
+            return m_szelesseg;
+        }
+        
+        int getMagassag(){
+            return m_magassag;
+        }
+};
+    
+class Negyzet: public Teglalap
+{
+    public:
+        Negyzet(int oldal): Teglalap(oldal, oldal)
+        {
+            m_szelesseg = oldal;
+            m_magassag = oldal;
+        }
+        
+        int getTerulet(){
+            return m_szelesseg * m_magassag;
+        }
+};
+    
+int main ()
+{
+    Teglalap* r = new Negyzet(10);
+    Negyzet* s = new Negyzet(10);
+        
+    std::cout << s->getTerulet() << r->getTerulet() << std::endl;
+}
+
+
+
+    ]]>
+</programlisting>
+        </para>
+        
+        
+        <para>Ugyan ugy hibába fog futni a javában megírt programunk, csak itt szulo és gyermek lesz
+            a példában, ahol a végén a getnevet, akarjuk meghívni de mivel a szulo nem rendelkezik
+            ezzel a függvénnyel igy nem fog tudni lefutni.</para>
+        <para> A programkódunk: 
+            <programlisting>
+    <![CDATA[
+                
+class szulo
+{
+    protected int m_kor;
+    protected String m_nev;
+    public void setKor(int kor) {
+        m_kor = kor;
+    }
+    
+    public void setNev(String nev) {
+        m_nev = nev;
+    }
+    
+    public int getNev2() {
+        return m_kor;
+    }
+}
+
+class gyerek extends szulo
+{
+    public String getNev() {
+        return m_nev;
+    }
+}
+
+class szgy
+{
+    public static void main (String args[])
+    {
+        szulo s = new gyerek();
+        s.setNev("Apa");
+        s.setKor(60);
+        
+        gyerek gy = new gyerek();
+        s.setNev("Geza");
+        s.setKor(15);
+        
+        System.out.println(gy.getNev() + " " + s.getNev());
+    }
+}
+
+
+
+    ]]>
+</programlisting>
+        </para>
+        
+        <para>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/szulogyermek.png" scale="70" />
+                </imageobject>
+            </mediaobject>
+        </para>
+        
+        
     </section>        
 <section>
         <title>Anti OO</title>
@@ -68,41 +284,86 @@ https://www.tankonyvtar.hu/hu/tartalom/tkt/javat-tanitok-javat/apas03.html#id561
             Ehhez a feladathoz a mar megcsinalt, BPP algoritmust fogjuk hasznalni, csak most a feladatunk az lesz, hogy a PI-nek kell a 10<superscript>6</superscript> 10<superscript>7</superscript> 10<superscript>8</superscript> darab jegyet kiszamolnunk és megkell néznünk, hogy melyik nyelvben milyen gyorsan tudja ezt a feladatot megoldani és kiszamolni ( Ezek a nyelvek a "C, C++, Java, C#").
 Ahhoz, hogy ezeket a futási időket megkapjuk a terminálban, az kódunkba a d értékét kell implementalnunk. Ha a 10^6 jegyét szeretnénk meghatározni, akkor a "for" ciklusban a d-t 1000000-re kell beállítanunk.
         </para>
-    </section>        
-<section>
-        <title>Hello, Android!</title>
-        <para>
-            Élesszük fel az SMNIST for Humans projektet!
-https://gitlab.com/nbatfai/smnist/tree/master/forHumans/SMNISTforHumansExp3/app/src/main
-Apró módosításokat eszközölj benne, pl. színvilág.
-        </para>
-        <para>
-            Megoldás videó:
-        </para>
-        <para>
-            Megoldás forrása:                
-        </para>
-        <para>
-            Tanulságok, tapasztalatok, magyarázat...
-        </para>
-    </section>        
-<section>
-        <title>Ciklomatikus komplexitás</title>
-        <para>
-            Számoljuk ki valamelyik programunk függvényeinek ciklomatikus komplexitását! Lásd a fogalom
-tekintetében a https://arato.inf.unideb.hu/batfai.norbert/UDPROG/deprecated/Prog2_2.pdf (77-79
-fóliát)!
-        </para>
-        <para>
-            Megoldás videó:
-        </para>
-        <para>
-            Megoldás forrása:                
-        </para>
-        <para>
-            Tanulságok, tapasztalatok, magyarázat...
-        </para>
-    </section>        
-        
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+    <para>Java:
+        <link
+            xlink:href="https://github.com/Drcsonka/Prog2/blob/master/antioo.java"/>
+    </para>
+    <para>C: 
+        <link
+            xlink:href="https://github.com/Drcsonka/Prog2/blob/master/antioo.c"/>
+    </para>
+    <para>C++:
+        <link
+            xlink:href="https://github.com/Drcsonka/Prog2/blob/master/antioo.cpp"/>
+    </para>
+    <para>C#:
+        <link
+            xlink:href="https://github.com/Drcsonka/Prog2/blob/master/antioo.cs"/>
+    </para>
+    <para>
+        <table frame="all">
+            <title>A futtatási idők összehasonlítása:</title>
+            <tgroup cols="5">
+                <colspec colname="c1" colnum="1" colwidth="1*"/>
+                <colspec colname="c2" colnum="2" colwidth="1*"/>
+                <colspec colname="c3" colnum="3" colwidth="1*"/>
+                <colspec colname="c4" colnum="4" colwidth="1*"/>
+                <colspec/>
+                <thead>
+                    <row>
+                        <entry/>
+                        <entry>Java</entry>
+                        <entry>C</entry>
+                        <entry>C++</entry>
+                        <entry>C#</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>10^6</entry>
+                        <entry>1.301</entry>
+                        <entry>1.7521</entry>
+                        <entry>1.9863</entry>
+                        <entry>1.521</entry>
+                    </row>
+                    <row>
+                        <entry>10^7</entry>
+                        <entry>17.5326</entry>
+                        <entry>20.125</entry>
+                        <entry>19.23</entry>
+                        <entry>22.8641</entry>
+                    </row>
+                    <row>
+                        <entry>10^8</entry>
+                        <entry>186.04</entry>
+                        <entry>210.5321</entry>
+                        <entry>195.127</entry>
+                        <entry>240.86</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+    </para>
+        <para>2 példa a futásra:</para>
+    <para>
+        C++ 10^8:
+        <mediaobject>
+            <imageobject>
+                <imagedata fileref="images/antioocpp.png" scale="70" />
+            </imageobject>
+        </mediaobject>
+    </para>
+    
+    <para>
+        java 10^6:
+        <mediaobject>
+            <imageobject>
+                <imagedata fileref="images/antioojava.png" scale="70" />
+            </imageobject>
+        </mediaobject>
+    </para>
+    
+    
+    
+    </section>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
 </chapter>                

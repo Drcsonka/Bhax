@@ -19,11 +19,133 @@ osztályát (miután kicsomagoltuk az src.zip állományt, arra ráengedve)!
             Megoldás forrása:                
         </para>
         <para>
-            
-Ebbem a feladatban az lesz a dolgunk, hogy a boost segítségével írnunk kell egy olyan C++ programot amely kiírja minden java-s fájlt a könyvárban. A boost használatához nagy segítség volt a weboldalan található tutorial. Nem fogunk jelen esetben egy teljesen új programot írni, hanem fel fogjuk használni a fénykard-ot, és ezt fogjuk kedvünkre módosítani.
-A programunk elején, azt nézzük meg helyesen van-e az argumentum megadva, mivel a keresni kivánt mappát így adjuk meg, szóval ha hiányzik vagy nem megfelelően van megadvan akkor hibát adunk vissza. Ha mappát talál, és a többi argumentum is megfelel, akkor továbblép a program és a "readacts" metódus fog müködésbe lépni, ami azt fogja csinálni, hogy megnézni a mappa argumentumot ( "boost::filesystem::path") . A mappában való válogatástt már a "!ext.compare ( boost::filesystem::extension ( path ) ) )" fogja, megnézni, hogy .java kiterjesztésű-e a fájl, és ha igen akkor félrerakjuk. Majd mikor végzett a programunk az elemzés részével, kiíratjuk a félrerakott fájlneveket. 
-
+        
+        A "read_acts" metódusunkba az fogjuk megvizsgálni, hogy a mappában talált fájlok kiterjesztése ".java"-e
+        és amennyiben ez megfelel belerakjuk a vektorunkba.
         </para>
+        
+        <para>
+            <programlisting>
+                <![CDATA[
+                
+                void read_acts (path p)
+    {
+ 
+    if (is_regular_file(p)) 
+    {
+        string ext (".java");
+  
+        if (!ext.compare(extension(p))) 
+        {
+        i++;
+        v.push_back(p); 
+        }
+        
+        ]]>
+            </programlisting>
+        </para>
+        
+        
+        <para>
+            A mainünkbe először is megfogjuk nézni, hogy az általunk megadott mappa létezik-e, és ha nem létezik ilyen nevű mappa a program kiírja a hibát.
+            <programlisting>
+    <![CDATA[
+                
+int main(int argc, char *argv[])
+    {
+
+     path p("Prog2");
+    if(!exists(p) || !is_directory(p))
+        {
+            cout<<p<<"A könvytár nem megfelelo!\n";
+            return 1;
+        }
+
+
+    ]]>
+</programlisting>
+        </para>
+        
+        <para>
+            Ha viszont létezik, meghívjuk az előbb deklarált "read_acts" metódusunkat, majd egy forciklussal kiíratjuk a 
+            vektorunk tartalmát amibe a ".java" fájlok kerültek és a vektorunk nagyságát is, hogy mennyi ilyen fájlt találtunk
+            <programlisting>
+    <![CDATA[
+                
+read_acts(p);  
+    for(auto&& x : v)
+    cout << x.filename()<< endl;
+    cout << i << " JDK osztályt találtunk.\n";
+
+
+
+    ]]>
+</programlisting>
+        </para>
+        
+        
+        
+        <para>
+            Az egész forráskódunk:
+            <programlisting>
+    <![CDATA[
+                
+//fordtás: g++ j.cpp -o j -std=c++11 -lboost_system -lboost_filesystem
+
+#include <iostream>
+#include <vector>
+#include <boost/filesystem.hpp>
+using namespace std;
+using namespace boost::filesystem;
+int i;
+vector<path> v;  
+void read_acts (path p)
+    {
+ 
+    if (is_regular_file(p)) 
+    {
+        string ext (".java");
+  
+        if (!ext.compare(extension(p))) 
+        {
+        i++;
+        v.push_back(p); 
+        }
+        } else if (is_directory (p))
+            for (directory_entry & entry:directory_iterator(p))
+            read_acts (entry.path());  
+    }
+  
+int main(int argc, char *argv[])
+    {
+
+     path p("Prog2");
+    if(!exists(p) || !is_directory(p))
+        {
+            cout<<p<<"A könvytár nem megfelelo!\n";
+            return 1;
+        }
+    read_acts(p);  
+    for(auto&& x : v)
+    cout << x.filename()<< endl;
+    cout << i << " JDK osztályt találtunk.\n";
+
+    }
+
+
+    ]]>
+</programlisting>
+        </para>
+        
+        <para>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/jdkosztaly.png" scale="70" />
+                </imageobject>
+            </mediaobject>
+        </para>
+        
+        
     </section>        
 
     <section>
@@ -51,24 +173,34 @@ A másolásunknál, nem csak egy egyszerű másolás megy végre, hanem egy mozg
 
 
         </para>
-    </section>   
+        <para>Ez itt fog megtörténni:</para>
+        
+        <para>
+            <programlisting>
+    <![CDATA[
+    
+     LZWBinFa ( LZWBinFa && regi ) 
+     {
+          std::cout << "LZWBinFa mozgató konstruktor" << std::endl;
+          
+          gyoker = nullptr;
+          *this = std::move (regi);
 
-<section>
-        <title>Hibásan implementált RSA törése</title>
-        <para>
-Készítsünk betű gyakoriság alapú törést egy hibásan implementált RSA kódoló:
-https://arato.inf.unideb.hu/batfai.norbert/UDPROG/deprecated/Prog2_3.pdf (71-73 fólia) által
-készített titkos szövegen.
+     }
+     LZWBinFa & operator= ( LZWBinFa && regi) 
+     {			
+	   std::cout << "LZWBinFa mozgató értékadás" << std::endl;
+	   std::swap (gyoker, regi.gyoker);	
+		
+	   return *this;
+			
+	}
+
+
+    ]]>
+</programlisting>
         </para>
-        <para>
-            Megoldás videó:
-        </para>
-        <para>
-            Megoldás forrása:                
-        </para>
-        <para>
-            Tanulságok, tapasztalatok, magyarázat...
-        </para>
+        
     </section>        
 
 <section>
@@ -89,6 +221,326 @@ hét/Perceptron osztály feladatot is.)
 Ehhez a feladathoz is a mandelbrot programunkat fogjuk segitsegul hasznalni, es ezzel fogunk dolgozni, mar prog 1-ben is és a múltheti feladatban is perceptronnal foglalkoztunk. A mostani feladatban viszont az lesz a különbségünk, hogy a perceptronunk nem csak egy értéket számolunk vel hanem egy képet szeretnénk kapni, visszatérési értéknek. A képünk magasság*szélesség mennyiségű értékből fog állni. De ezek az értékek is ugyan úgy mint a régebbi feladatban a [0,1] intervallumból kapnka. Az operátorfüggvényünkben nem csak egy értéket ad vissza hanem egy tombot, vagy akar vektort is igy, ha tömbről beszélünk double*-ot kell használnunk.
 
         </para>
+    <para>
+        <programlisting>
+    <![CDATA[
+                
+/**
+ * @brief JUDAH - Jacob is equipped with a text-based user interface
+ *
+ * @file ql.hpp
+ * @author  Norbert Bátfai <nbatfai@gmail.com>
+ * @version 0.0.1
+ *
+ * @section LICENSE
+ *
+ * Copyright (C) 2015 Norbert Bátfai, batfai.norbert@inf.unideb.hu
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @section DESCRIPTION
+ *
+ * JACOB, https://github.com/nbatfai/jacob
+ *
+ * "The son of Isaac is Jacob." The project called Jacob is an experiment
+ * to replace Isaac's (GUI based) visual imagination with a character console.
+ *
+ * ISAAC, https://github.com/nbatfai/isaac
+ *
+ * "The son of Samu is Isaac." The project called Isaac is a case study
+ * of using deep Q learning with neural networks for predicting the next
+ * sentence of a conversation.
+ *
+ * SAMU, https://github.com/nbatfai/samu
+ *
+ * The main purpose of this project is to allow the evaluation and
+ * verification of the results of the paper entitled "A disembodied
+ * developmental robotic agent called Samu Bátfai". It is our hope
+ * that Samu will be the ancestor of developmental robotics chatter
+ * bots that will be able to chat in natural language like humans do.
+ *
+ */
+
+#include <iostream>
+#include <cstdarg>
+#include <map>
+#include <iterator>
+#include <cmath>
+#include <random>
+#include <limits>
+#include <fstream>
+
+class Perceptron
+{
+public:
+  Perceptron ( int nof, ... )
+  {
+    n_layers = nof;
+
+    units = new double*[n_layers];
+    n_units = new int[n_layers];
+
+    va_list vap;
+
+    va_start ( vap, nof );
+
+    for ( int i {0}; i < n_layers; ++i )
+      {
+        n_units[i] = va_arg ( vap, int );
+
+        if ( i )
+          units[i] = new double [n_units[i]];
+      }
+
+    va_end ( vap );
+
+    weights = new double**[n_layers-1];
+
+#ifndef RND_DEBUG
+    std::random_device init;
+    std::default_random_engine gen {init() };
+#else
+    std::default_random_engine gen;
+#endif
+
+    std::uniform_real_distribution<double> dist ( -1.0, 1.0 );
+
+    for ( int i {1}; i < n_layers; ++i )
+      {
+        weights[i-1] = new double *[n_units[i]];
+
+        for ( int j {0}; j < n_units[i]; ++j )
+          {
+            weights[i-1][j] = new double [n_units[i-1]];
+
+            for ( int k {0}; k < n_units[i-1]; ++k )
+              {
+                weights[i-1][j][k] = dist ( gen );
+              }
+          }
+      }
+  }
+
+  Perceptron ( std::fstream & file )
+  {
+    file >> n_layers;
+
+    units = new double*[n_layers];
+    n_units = new int[n_layers];
+
+    for ( int i {0}; i < n_layers; ++i )
+      {
+        file >> n_units[i];
+
+        if ( i )
+          units[i] = new double [n_units[i]];
+      }
+
+    weights = new double**[n_layers-1];
+
+    for ( int i {1}; i < n_layers; ++i )
+      {
+        weights[i-1] = new double *[n_units[i]];
+
+        for ( int j {0}; j < n_units[i]; ++j )
+          {
+            weights[i-1][j] = new double [n_units[i-1]];
+
+            for ( int k {0}; k < n_units[i-1]; ++k )
+              {
+                file >> weights[i-1][j][k];
+              }
+          }
+      }
+  }
+
+
+  double sigmoid ( double x )
+  {
+    return 1.0/ ( 1.0 + exp ( -x ) );
+  }
+
+
+  double* operator() ( double image [] )
+  {
+
+    units[0] = image;
+
+    for ( int i {1}; i < n_layers; ++i )
+      {
+
+#ifdef CUDA_PRCPS
+
+        cuda_layer ( i, n_units, units, weights );
+
+#else
+
+        #pragma omp parallel for
+        for ( int j = 0; j < n_units[i]; ++j )
+          {
+            units[i][j] = 0.0;
+
+            for ( int k = 0; k < n_units[i-1]; ++k )
+              {
+                units[i][j] += weights[i-1][j][k] * units[i-1][k];
+              }
+
+            units[i][j] = sigmoid ( units[i][j] );
+
+          }
+
+#endif
+
+      }
+
+    for (int i = 0; i < n_units[n_layers - 1]; i++)
+        image[i] = units[n_layers - 1][i];
+    
+    return image;
+
+  }
+
+  void learning ( double image [], double q, double prev_q )
+  {
+    double y[1] {q};
+
+    learning ( image, y );
+  }
+
+  void learning ( double image [], double y[] )
+  {
+    //( *this ) ( image );
+
+    units[0] = image;
+
+    double ** backs = new double*[n_layers-1];
+
+    for ( int i {0}; i < n_layers-1; ++i )
+      {
+        backs[i] = new double [n_units[i+1]];
+      }
+
+    int i {n_layers-1};
+
+    for ( int j {0}; j < n_units[i]; ++j )
+      {
+        backs[i-1][j] = sigmoid ( units[i][j] ) * ( 1.0-sigmoid ( units[i][j] ) ) * ( y[j] - units[i][j] );
+
+        for ( int k {0}; k < n_units[i-1]; ++k )
+          {
+            weights[i-1][j][k] += ( 0.2* backs[i-1][j] *units[i-1][k] );
+          }
+
+      }
+
+    for ( int i {n_layers-2}; i >0 ; --i )
+      {
+
+        #pragma omp parallel for
+        for ( int j =0; j < n_units[i]; ++j )
+          {
+
+            double sum = 0.0;
+
+            for ( int l = 0; l < n_units[i+1]; ++l )
+              {
+                sum += 0.19*weights[i][l][j]*backs[i][l];
+              }
+
+            backs[i-1][j] = sigmoid ( units[i][j] ) * ( 1.0-sigmoid ( units[i][j] ) ) * sum;
+
+            for ( int k = 0; k < n_units[i-1]; ++k )
+              {
+                weights[i-1][j][k] += ( 0.19* backs[i-1][j] *units[i-1][k] );
+              }
+          }
+      }
+
+    for ( int i {0}; i < n_layers-1; ++i )
+      {
+        delete [] backs[i];
+      }
+
+    delete [] backs;
+
+  }
+
+  ~Perceptron()
+  {
+    for ( int i {1}; i < n_layers; ++i )
+      {
+        for ( int j {0}; j < n_units[i]; ++j )
+          {
+            delete [] weights[i-1][j];
+          }
+
+        delete [] weights[i-1];
+      }
+
+    delete [] weights;
+
+    for ( int i {0}; i < n_layers; ++i )
+      {
+        if ( i )
+          delete [] units[i];
+      }
+
+    delete [] units;
+    delete [] n_units;
+
+  }
+
+  void save ( std::fstream & out )
+  {
+    out << " "
+        << n_layers;
+
+    for ( int i {0}; i < n_layers; ++i )
+      out << " " << n_units[i];
+
+    for ( int i {1}; i < n_layers; ++i )
+      {
+        for ( int j {0}; j < n_units[i]; ++j )
+          {
+            for ( int k {0}; k < n_units[i-1]; ++k )
+              {
+                out << " "
+                    << weights[i-1][j][k];
+
+              }
+          }
+      }
+
+  }
+
+private:
+  Perceptron ( const Perceptron & );
+  Perceptron & operator= ( const Perceptron & );
+
+  int n_layers;
+  int* n_units;
+  double **units;
+  double ***weights;
+
+};
+
+
+
+    ]]>
+</programlisting>
+    </para>
+    
     </section>             
         
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         

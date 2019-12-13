@@ -23,48 +23,108 @@ az algot.) és az OpenJDK, Oracle JDK-ban a Sun által adott OO szervezés ua.!
         <para>
             Ezzel a programmal már foglalkoztunk Prog1-en.
         </para>
+        
+        <para>
+            <programlisting language="JAVA">
+                
+                <![CDATA[
+public class polargenerator
+{
+    boolean nemTarolt = true;
+    double tarolt;
+    public polargenerator() 
+    {
+        nemTarolt = true;
+    }
+    public double kovetkezo()
+    {
+        if(nemTarolt)
+        {
+            double u1, u2, v1, v2, w;
+            do
+            {
+                u1 = Math.random();
+                u2 = Math.random();
+                v1 = 2 * u1 - 1;
+                v2 = 2 * u2 - 1;
+                w = v1 * v1 + v2 * v2;
+            } while(w > 1);
+            double r = Math.sqrt((-2 * Math.log(w)) / w);
+            tarolt = r * v2;
+            nemTarolt = !nemTarolt;
+            return r * v1;
+        }
+        else 
+        {
+            nemTarolt = !nemTarolt;
+            return tarolt;
+        }
+    }
+    public static void main(String[] args)
+    {
+        polargenerator g = new polargenerator();
+        for (int i = 0; i < 10; ++i)
+        {
+            System.out.println(g.kovetkezo());
+        }
+    }
+}   
+        ]]>
+            </programlisting>
+        </para>
 	<para>
 	A programunk két változót fog előállítani, az első fogja tárolni az értékünkket egy 'tarolt' nevu double változóban. A másik egy boolean típusú változó lesz amit azt fogja tárolni, hogy van-e számunk eltárolva vagy sem.
 
 </para>
-<para>
+        <para>
+        <programlisting>
+            
+            <![CDATA[
+            boolean nemTarolt = true;
+            double tarolt;
+        ]]>
+        
+        </programlisting>
+        </para>
+            <para>
 	A program eleje egy 'if' elagazás aminek az 'igaz' része fog lefutni, mivel a második változónk vagyis 'nemTarolt' 'true'. Ez álltal, lefut a benne lévő do while ciklus ami generálni fog egy 1-nél nagyobb számot, majd eltároljuk ezt a 'tarolt' valtozóba, és a 'nemTarolt' változót hamis-á tesszük. 
 	Majd következő futtatásra, az 'if' ciklusunk 'hamis' része fog lefutni, ami kiíratja a letárolt számot, és a 'nemTarolt' logikai változót negatívvá változtatjuk, hogy legközelebb, amikor újra lefuttatjuk a programot, újra 2 számot kapjunk.
 </para>
-<para>
-	A C++-os verzióban nem elég csak a konstruktort de a dekonstruktort is megkell írni, mivel itt nincs GarbageCollectorunk mint Java-ban.
-</para>
-<para> 
-
-	</para>
+        <para>
+            <programlisting>
+                <![CDATA[
+                if(nemTarolt)
+        {
+            double u1, u2, v1, v2, w;
+            do
+            {
+                u1 = Math.random();
+                u2 = Math.random();
+                v1 = 2 * u1 - 1;
+                v2 = 2 * u2 - 1;
+                w = v1 * v1 + v2 * v2;
+            } while(w > 1);
+            double r = Math.sqrt((-2 * Math.log(w)) / w);
+            tarolt = r * v2;
+            nincsTarolt = !nincsTarolt;
+            return r * v1;
+        }
+        else 
+        {
+            nincsTarolt = !nincsTarolt;
+            return tarolt;
+        }
+               ]]> 
+            </programlisting>
+        </para>
+        <para>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/polargenerator.png" scale="60" />
+                </imageobject>
+            </mediaobject>
+        </para>
     </section>        
-
-
-
-
-    <section>
-        <title>Homokózó</title>
-        <para>
-            Írjuk át az első védési programot (LZW binfa) C++ nyelvről Java nyelvre, ugyanúgy működjön!
-Mutassunk rá, hogy gyakorlatilag a pointereket és referenciákat kell kiirtani és minden máris működik
-(erre utal a feladat neve, hogy Java-ban minden referencia, nincs választás, hogy mondjuk egy
-attribútum pointer, referencia vagy tagként tartalmazott legyen).
-Miután már áttettük Java nyelvre, tegyük be egy Java Servletbe és a böngészőből GET-es kéréssel
-(például a böngésző címsorából) kapja meg azt a mintát, amelynek kiszámolja az LZW binfáját!
-        </para>
-        <para>
-            Megoldás videó:
-        </para>
-        <para>
-            Megoldás forrása:                
-        </para>
-        <para>
-            Tanulságok, tapasztalatok, magyarázat...
-        </para>
-    </section>        
-        
-
-
 <section>
         <title>„Gagyi”</title>
         <para>
@@ -82,14 +142,52 @@ példányokat poolozza!
             Megoldás forrása:https://github.com/Drcsonka/Prog2/blob/master/gagyi.java           
         </para>
         <para>
-	A lábjegyzetben talált segédlet alapján jobban megértve a feladatot és kipróbálva a próbafeladatokat a '-129' használatával mindkettő változónál végtelen ciklusba torkollunk. Miközben a '-128' használatával nincs végtelen ciklus
+            <programlisting>
+                <![CDATA[
+                public class gagyi{
 
+public static void main(String[] args) {
+	
+	Integer x = -128;
+	Integer t = -128;
+	while (x <= t && x >= t && t != x)
+		{ System.out.println("Gagyi");  }
+	System.out.println("Gagyi vége"); 
+}
+}
+        ]]> 
 
-A feladat megoldásához a fentebb említett, JDK Integer.java forrását kell megvizsgálnunk!
-A '-128' még az előző forrásban talált intervallumon belül található, így ugyan abból a poolból kapnak majd Integer és mivel ugyan az az értékük így ugyanazt az objektumot kapják, ezért a címük is meg fog eggyezni, így nem teljesül a feltétel és nem kerül végtelen ciklusba.
-A '-129'-es példánál viszont, más a helyzet mivel a '-129' már másik intervallumbanvan, így a különböző Integer objektum jön létre, más címekkel és így a feltétel teljesülése miatt, végtelen ciklusunk lesz...
-
+            </programlisting>
         </para>
+        <para> A lábjegyzetben talált segédlet alapján jobban megértve a feladatot és kipróbálva a
+            próbafeladatokat a '-129' használatával mindkettő változónál végtelen ciklusba
+            torkollunk. Miközben a '-128' használatával nincs végtelen ciklus A feladat megoldásához
+            a fentebb említett, JDK Integer.java forrását kell megvizsgálnunk! 
+        </para>
+        <para>A '-128' még az előző forrásban talált intervallumon belül található, így ugyan abból
+            a poolból kapnak majd Integer és mivel ugyan az az értékük így ugyanazt az objektumot
+            kapják, ezért a címük is meg fog eggyezni, így nem teljesül a feltétel és nem kerül
+            végtelen ciklusba. A '-129'-es példánál viszont, más a helyzet mivel a '-129' már másik
+            intervallumbanvan, így a különböző Integer objektum jön létre, más címekkel és így a
+            feltétel teljesülése miatt, végtelen ciklusunk lesz... 
+        </para>
+    <para> 
+        Itt egy példa a véges-re, amikor nem ütközünk végtelen ciklusba:
+        <mediaobject>
+            <imageobject>
+                <imagedata fileref="images/gagyiveges.png" scale="60" />
+            </imageobject>
+        </mediaobject>
+    </para>
+    <para>
+        
+        Ez pedig egy példa a végtelen ciklusra:
+        <mediaobject>
+            <imageobject>
+                <imagedata fileref="images/gagyivegtelen.png" scale="60" />
+            </imageobject>
+        </mediaobject>
+    </para>
     </section> 
 
 	<section>
@@ -105,6 +203,27 @@ conditions-t! https://en.wikipedia.org/wiki/Yoda_conditions
             Megoldás forrása: https://github.com/Drcsonka/Prog2/blob/master/yoda.java               
         </para>
         <para>
+            <programlisting>
+                <![CDATA[
+                public class yoda 
+    {
+	public static void main(String[] args)ű
+	{
+	String s=null;
+	if ("yoda".equals(s))  
+	   //(s.equals("yoda")) 
+		{
+	
+		System.out.println("Yoda");
+	
+	
+	   }
+	   }
+    }
+    ]]>
+            </programlisting>
+        </para>
+        <para>
    A Yoda condition nevét a Starwars karakterről kapta, aki a mondat második felét mondta először és utánna az elsőt, ezzel felcserélve a kettőt.
             A Yoda condition lényege a programozásban, hogy egy ekvivalenciánál a megszokottól eltérően a konstanst nem a jobb oldalon helyezkedik el, hanem a bal oldalon.
             Ezt legfőkébb Stringeknél szokták alkalmaazni. Szóval nem az objektumunkat hasonlítjuk össze a stringgel, hanem a stringet az objektumunkkal.
@@ -112,6 +231,16 @@ conditions-t! https://en.wikipedia.org/wiki/Yoda_conditions
         
 
         </para>
+	    <para> 
+	        Az első futtatásra a programunk hiba nélkül lefutott, de viszont nem írt ki semmit ekkor a "("yoda".equals(s))"-t használtuk.
+	        Második futtatásra a "(s.equals("yoda"))"-t használva NullPinterException erroral találkozunk.
+         <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/yoda.png" scale="70" />
+                </imageobject>
+            </mediaobject>
+        </para>
+	    
     </section> 
 
 	<section>
@@ -122,20 +251,130 @@ Ha megakadsz, de csak végső esetben: https://www.tankonyvtar.hu/hu/tartalom/tk
 melyet szeretném, ha átélnél).
         </para>
         <para>
-            Megoldás videó:
-        </para>
-        <para>
             Megoldás forrása:                
         </para>
+	    
+	    <para>
+	        <programlisting>
+	            <![CDATA[
+	    public class PiBBP 
+	    {
+	    
+	    String d16PiHexaBetuk;
+	    public PiBBP(int d) 
+	    {
+	    
+	    double d16Pi = 0.0d;
+	    
+	    double d16S1t = d16Sj(d, 1);
+	    double d16S4t = d16Sj(d, 4);
+	    double d16S5t = d16Sj(d, 5);
+	    double d16S6t = d16Sj(d, 6);
+	    
+	    d16Pi = 4.0d*d16S1t - 2.0d*d16S4t - d16S5t - d16S6t;
+	    
+	    d16Pi = d16Pi - StrictMath.floor(d16Pi);
+	    
+	    StringBuffer sb = new StringBuffer();
+	    
+	    Character hexaBetuk[] = {'A',
+	    'B',
+	    'C',
+	    'D',
+	    'E',
+	    'F'};
+	    
+	    while(d16Pi != 0.0d) {
+	    
+	    int jegy = (int)StrictMath.floor(16.0d*d16Pi);
+	    
+	    if(jegy<10)
+	        sb.append(jegy);
+	        else
+	        sb.append(hexaBetuk[jegy-10]);
+	        
+	        d16Pi = (16.0d*d16Pi) - StrictMath.floor(16.0d*d16Pi);
+	        }
+	        
+	        d16PiHexaBetuk = sb.toString();
+	        
+	        }
+	        
+	        public double d16Sj(int d, int j) 
+	        { 
+	        
+	        double d16Sj = 0.0d;
+	        
+	        for(int k=0; k<=d; ++k)
+	        d16Sj += (double)n16modk(d-k, 8*k + j) / (double)(8*k + j);
+	        
+	        return d16Sj - StrictMath.floor(d16Sj);
+	        }
+	        public long n16modk(int n, int k) 
+	        { 
+	        
+	        int t = 1;
+	        while(t <= n)
+	        t *= 2;
+	        
+	        long r = 1;
+	        
+	        while(true) 
+	        {
+	        
+	        if(n >= t) 
+	        {
+	        r = (16*r) % k;
+	        n = n - t;
+	        }
+	        
+	        t = t/2;
+	        
+	        if(t < 1)
+	        break;
+	        
+	        r = (r*r) % k;
+	        
+	        }
+	        
+	        return r;
+	        }
+	        
+	        public String toString() 
+	        {
+	        
+	        return d16PiHexaBetuk;
+	        }
+	        
+	        public static void main(String args[]) 
+	        {        
+	        System.out.print(new PiBBP(24015)); 
+	        }
+	        }
+	        ]]>
+	        </programlisting>
+	    
+	    </para>
+	    
+        <para> Az algoritmus segítégével a Pi számjegyeit nem csak egy tizedestől kezdve, hanem egy
+            tetszőleges kezdőponttól is ki tudjuk számolni, így az előtte lévő számjegyeket nemkell
+            kiszámítanunk. A konstruktorunknak van egy paramétere ami a 'd' lesz. Ezt követően
+            létrehozzuk a változókat. Kezdetben a "d16Pi"-t aminek kezdőértéke a "0.0d"-vel lesz,
+            ezzel jelölve, hogy double értékű lesz. Az S1,S4,S5,S6-al számoljuk az értékét. A
+            kiszámított értékből kivonjuk a lefelé kerekített értékét a d16Pi-nek ezzel elérve, hogy
+            0 és 1 közé essen d16Pi értéke. Majd létrehozunk egy while ciklust, ami addig meg fog
+            dolgozni még a d16Pi értéke 0 nem lesz, majd lekerekítjük és eltároljuk ezt a jegybe. Ha
+            a jegy 10-nél kisebb nem kell vele semmit csinálnunk. De mivel a 16-os számrendszerben a
+            9-nél nagyobb számok már betűkként szerepelnek (A-F) így ha 9-nél nagyobb, akkor a
+            visszaadott értéket a hexajegyekből választjuk. Ezt úgy valósítjuk meg, hogy ha például
+            12-őt kapunk akkor abból kivonva 10-et kapjuk a 2-őt és 2-es indexű elemet a tömbben
+            használjuk. </para>
         <para>
-            Az algoritmus segítégével a Pi számjegyeit nem csak egy tizedestől kezdve, hanem egy tetszőleges kezdőponttól is ki tudjuk számolni, így az előtte lévő számjegyeket nemkell kiszámítanunk.
-       
-
-A konstruktorunknak van egy paramétere ami a 'd' lesz. Ezt követően létrehozzuk a változókat. Kezdetben a d16pi-t aminek kezdőértéke a 0.0d-vel lesz, ezzel jelölve, hogy double értékű lesz. Az S1,S4,S5,S6-al számoljuk az értékét. A kiszámított értékből kivonjuk a lefelé kerekített értékét a d16Pi-nek ezzel elérve, hogy 0 és 1 közé essen d16Pi értéke.
-          Majd létrehozunk egy while ciklust, ami addig meg fog dolgozni még a d16Pi értéke 0 nem lesz, majd lekerekítjük és eltároljuk ezt a jegybe.
-Ha a jegy 10-nél kisebb nem kell vele semmit csinálnunk. De mivel a 16-os számrendszerben a 9-nél nagyobb számok már betűkként szerepelnek (A-F) így ha 9-nél nagyobb, akkor a visszaadott értéket a hexajegyekből választjuk. Ezt úgy valósítjuk meg, hogy ha például 12-őt kapunk akkor abból kivonva 10-et kapjuk a 2-őt és 2-es indexű elemet a tömbben használjuk.
-        
-
+            <mediaobject>
+            <imageobject>
+                <imagedata fileref="images/PiBBP2.png" scale="70" />
+            </imageobject>
+            </mediaobject>
         </para>
     </section> 
 

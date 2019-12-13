@@ -11,24 +11,31 @@
         <para>
 	Fordítsuk le és futtassuk a Javat tanítok könyv MandelbrotHalmazNagyító.java forrását úgy, hogy a fájl nevekben és a forrásokban is meghagyjuk az ékezetes betűket! https://www.tankonyvtar.hu/hu/tartalom/tkt/javat-tanitok-javat/adatok.html
         </para>
+        <para>----</para>
+        <para> A java előnye, hogy itt nincs azzal problemánk ,hogy a magyar betűket nem tudja
+            feldolgozni, mivel nagyon sok karakterkészlet hasznátará képes beleértve a nekünk
+            szükséges "ISO-8859-1"-est. Ezzel a programmal már foglalkoztunk Prog1-en, így már
+            ismerjük, de problémánk a mandelbrot lefuttatásával lesz mivel ez is magyar
+            karatktereket tartalmaz, de ezt könnyen ki tudjuk küszöbölni a "--encoding" kapcsóló
+            használatával, ami azt fogja eredmenyézni, hogy mi tudjuk megszabni, hogy milyen
+            karakterkészletet használjon a program. </para>
+        
         <para>
-            Megoldás videó:
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/Mandelbrotnagyito.png" scale="70" />
+                </imageobject>
+            </mediaobject>
         </para>
-        <para>
-            Megoldás forrása:                
-        </para>
-        <para>
-             A java előnye, hogy itt nincs azzal problemánk a magyar betűket nem tudná feldolgozni, mivel nagyon sok karakterkészlet hasznátará képes beleértve a nekünk szükséges ISO-8859-est. 
-Ezzel a programmal már foglalkoztunk Prog1-en, így már ismerjük, de problémánk a mandelbrot lefuttatásával lesz mivel ez is magyar karatktereket tartalmaz, de ezt könnyen ki tudjuk küszöbölni a "--encoding" kapcsóló használatával, ami azt fogja eredmenyézni, hogy mi tudjuk megszabni, hogy milyen karakterkészletet használjon a program.
-
-        </para>
+        
     </section>        
 
     <section>
-        <title>OOCWC lexer</title>
+        <title>l334d1c4</title>
         <para>
-            Izzítsuk be az OOCWC-t és vázoljuk a https://github.com/nbatfai/robocaremulator/blob/master/justine/rcemu/src/carlexer.ll lexert és kapcsolását a programunk OO
-struktúrájába!
+            Írj olyan OO Java vagy C++ osztályt, amely leet cipherként működik, azaz megvalósítja ezt a betű
+            helyettesítést: https://simple.wikipedia.org/wiki/Leet (Ha ez első részben nem tetted meg, akkor írasd
+            ki és magyarázd meg a használt struktúratömb memóriafoglalását!)
         </para>
         <para>
             Megoldás videó:
@@ -36,51 +43,293 @@ struktúrájába!
         <para>
             Megoldás forrása:                
         </para>
+        
         <para>
+            <programlisting>
+    <![CDATA[
+                import java.io.*;
+import java.util.*;
+class Lexer{
+	private String text;
+	public Lexer(String text)
+	{
+		this.text=text.toLowerCase();
+	}
+	public String[][] lexer=
+	{
+		{"α", "4", "@", "/-\\"},//a
+		{"ß", "8", "|3", "|}"},//b
+		{"©", "€", "¢", "{"},//c
+		{"d", "|)", "|]", "|}"},//d
+		{"Σ", "Œ", "3", "3"},//e
+		{"╒", "|=", "£", "|#"},//f
+		{"g", "6", "[", "[+"},//g
+		{"♓", "4", "|-|", "[-]"},//h
+		{"1", "1", "|", "!"},//i
+		{"⌡", "7", "_|", "_/"},//j
+		{"k", "|<", "1<", "|{"},//k
+		{"l", "1", "|", "|_"},//l
+		{"m", "44", "(V)", "|\\/|"},//m
+		{"π", "|\\|", "/\\/", "/V"},//n
+		{"σ", "0", "()", "[]"},//o
+		{"p", "/o", "|D", "|o"},//p
+		{"q", "9", "O_", "(,)"},//q
+		{"®", "Γ", "12", "|2"},//r
+		{"s", "5", "$", "$"},//s
+		{"†", "╤", "τ", "'|'"},//t
+		{"µ", "|_|", "(_)", "[_]"},//u
+		{"v", "\\/", "\\/", "\\/"},//v
+		{"w", "VV", "\\/\\/", "(/\\)"},//w
+		{"x", "%", ")(", ")("},//x
+		{"y", "¥", "", ""},//y
+		{"z", "2", "7_", ">_"},//z
+		{"Ω", "○", "º", "☺"},//0
+		{"I", "I", "L", "L"},//1
+		{"Z", "Z", "Z", "e"},//2
+		{"E", "E", "E", "E"},//3
+		{"h", "h", "A", "A"},//4
+		{"S", "S", "S", "S"},//5
+		{"b", "b", "G", "G"},//6
+		{"T", "T", "j", "j"},//7
+		{"X", "X", "X", "X"},//8
+		{"g", "g", "j", "j"}//9
+	};
+	public String Lextext(){
+		StringBuilder sb=new StringBuilder();
+		String newtext;
+		for(char c:text.toCharArray()){
+			Random rand = new Random();
+			int random = rand.nextInt(4);
+			switch(c){
+				case 'a':sb.append(lexer[0][random]);
+				break;
+				case 'b':sb.append(lexer[1][random]);
+				break;
+				case 'c':sb.append(lexer[2][random]);
+				break;
+				case 'd':sb.append(lexer[3][random]);
+				break;
+				case 'e':sb.append(lexer[4][random]);
+				break;
+				case 'f':sb.append(lexer[5][random]);
+				break;
+				case 'g':sb.append(lexer[6][random]);
+				break;
+				case 'h':sb.append(lexer[7][random]);
+				break;
+				case 'i':sb.append(lexer[8][random]);
+				break;
+				case 'j':sb.append(lexer[9][random]);
+				break;
+				case 'k':sb.append(lexer[10][random]);
+				break;
+				case 'l':sb.append(lexer[11][random]);
+				break;
+				case 'n':sb.append(lexer[12][random]);
+				break;
+				case 'm':sb.append(lexer[13][random]);
+				break;
+				case 'o':sb.append(lexer[14][random]);
+				break;
+				case 'p':sb.append(lexer[15][random]);
+				break;
+				case 'q':sb.append(lexer[16][random]);
+				break;
+				case 'r':sb.append(lexer[17][random]);
+				break;
+				case 's':sb.append(lexer[18][random]);
+				break;
+				case 't':sb.append(lexer[19][random]);
+				break;
+				case 'u':sb.append(lexer[20][random]);
+				break;
+				case 'v':sb.append(lexer[21][random]);
+				break;
+				case 'w':sb.append(lexer[22][random]);
+				break;
+				case 'x':sb.append(lexer[23][random]);
+				break;
+				case 'y':sb.append(lexer[24][random]);
+				break;
+				case 'z':sb.append(lexer[25][random]);
+				break;
+				case '0':sb.append(lexer[26][random]);
+				break;
+				case '1':sb.append(lexer[27][random]);
+				break;
+				case '2':sb.append(lexer[28][random]);
+				break;
+				case '3':sb.append(lexer[29][random]);
+				break;
+				case '4':sb.append(lexer[30][random]);
+				break;
+				case '5':sb.append(lexer[31][random]);
+				break;
+				case '6':sb.append(lexer[32][random]);
+				break;
+				case '7':sb.append(lexer[33][random]);
+				break;
+				case '8':sb.append(lexer[34][random]);
+				break;
+				case '9':sb.append(lexer[35][random]);
+				break;
+				default: sb.append(c);
+			}
+		}
+		newtext=sb.toString();
+		return newtext;
+		
+	}
+	
+	
+}
+class Leet{
+public static void main(String[] args) {
+    
+    
+ 	while(true){
+ 	    Scanner in = new Scanner(System.in);
+ 	    String s = in.nextLine();
+ 	    if(s.length()<1){
+ 	    	break;
+ 	    }
+ 	    System.out.println();
+ 	    Lexer lex=new Lexer(s);
+ 	    System.out.println(lex.Lextext());
+ 	    System.out.println();
+	   	}
+}
+}
+       
 
 
 
-Prog1-en már foglalkoztunk Lexerrel, röviden a lexer feladat, hogy szöveget elemezzen, és a programok készítése előre megadott szabályok alapján.
-Ebben a feladatban egy carlex-errel fogunk dolgozni.
-A feladat részeket itt "%" jelekkel válasszuk el. 
-Az első részben megadjuk a definíciókat és a konstansokat, mint peldaul útvonal, pozíció, gangsterek. Az itt kapott pozició értékekkel fogjuk meghatározni a kocsink koordinátáit.
-A következő feladatrészben majd a lexernek irunk, szavakat amiket itt elfog fogadni.
-Majd meghívjuk a CarLexer file-t. 
-          
+    ]]>
+</programlisting>
+        </para>
+        
+        <para>
+            Először is a programunkban kisbetűvé alakítunk mindent így a programunknak könnyebb lesz a betűk felismerése:
+            
+            <programlisting>
+            <![CDATA[
+  public Lexer(String text)
+	{
+		this.text=text.toLowerCase();
+	}
+
+    ]]>
+    </programlisting>
+        </para>
+        <para>
+        A lexer objektumunk fogja tartalmazni az ABCnket amivel majd behelyettítünk és "titkosítunk"
+        
+            <programlisting>
+    <![CDATA[
+                public String[][] lexer=
+	{
+		{"α", "4", "@", "/-\\"},//a
+		{"ß", "8", "|3", "|}"},//b
+		
+		....
+    }
 
 
-        </para>
-    </section>  
-<section>
-        <title>Paszigráfia Rapszódia OpenGL full screen vizualizáció</title>
-        <para>
-           Lásd vis_prel_para.pdf! Apró módosításokat eszközölj benne, pl. színvilág, textúrázás, a szintek jobb
-elkülönítése, kézreállóbb irányítás.
-        </para>
-        <para>
-            Megoldás videó:
-        </para>
-        <para>
-            Megoldás forrása:                
-        </para>
-        <para>
-            Arról, hogy mi is ez a Pasziográfia Rapszódia, a vis_prel_para doksiban olvashatunk részletesebben. Röviden összegezve pedig az esport mesterségesen kialakított nyelve, mivel a humunkulusz és a mesterséges humunkulsz között próbál meg kapcsolatot/kommunikációt kialakítani. Ez egy harmadlagos fejlesztendő nyelv pontosan, amely az esport játékba van beágyazva. A feladatban pedig konkrétan a vizualizációval tudunk szórakozni. Visszatérve a humunkuluszra pedig, ezt Neumann nevéhez köthetjük, és ennek a létrejöttéhez szükséges a központi idegrendszer, valamint a donaldi külső memória, illetve az ezekből kiinduló elméleti háttér. Ez az egész elmélet lényegében a komplexitás méréséről szól, tehát az idegrendszer és a külső memória, vagy akár a humunkulusz és a mesterséges humunkulusz komplexitását is össze tudja hasonlítani, és ami fontos neki, az az, hogy a humunkulusz által létrehozott mesterséges humunkulusz összehasonlítható legyen, vagy akár a mesterséges meghaladja a létrehozóét is. Nos ez lett volna az elméleti háttér röviden. Ha pedig ki szeretnénk próbálni, akkor először telepítenünk kell az opengl-t, és a további szükséget csomagokat. A fordítás futtatás a forrásban már szintén megtalálható, utóbbihoz még 6 darab képre van szükségünk, másra már nem. És valami ilyesmi eredményt kapunk ekkor.
 
+    ]]>
+</programlisting>
         </para>
-    </section> 
-<section>
-        <title>Paszigráfia Rapszódia LuaLaTeX vizualizáció</title>
+        
         <para>
-            Lásd vis_prel_para.pdf! Apró módosításokat eszközölj benne, pl. színvilág, még erősebb 3D-s hatás.
+            Majd a "Lextext"-el a beolvasott szöveget karakterekké alakítja, és ezeket egy forciklussal egyenként helyetesítjuk egy 
+            random generált hasonlattal a Lexer osztályunkból.
+            <programlisting>
+    <![CDATA[
+                
+public String Lextext(){
+		StringBuilder sb=new StringBuilder();
+		String newtext;
+		for(char c:text.toCharArray()){
+			Random rand = new Random();
+			int random = rand.nextInt(4);
+			switch(c){
+				case 'a':sb.append(lexer[0][random]);
+				break;
+				case 'b':sb.append(lexer[1][random]);
+				break;
+				
+				..
+				
+				}
+
+
+    ]]>
+</programlisting>
         </para>
         <para>
-            Megoldás videó:
+            Majd a programunk végén található a "main"-ünk, amiben található lesz a scannerünk amivel a bemenetet nezzük, itt kapjuk amjd meg az átalakítandó szavakat
+            és a kíírás is itt hívódik meg, amiért a Lextext lesz felelős.
+            <programlisting>
+    <![CDATA[
+                
+
+
+class Leet{
+public static void main(String[] args) {
+    
+    
+ 	while(true){
+ 	    Scanner in = new Scanner(System.in);
+ 	    String s = in.nextLine();
+ 	    if(s.length()<1){
+ 	    	break;
+ 	    }
+ 	    System.out.println();
+ 	    Lexer lex=new Lexer(s);
+ 	    System.out.println(lex.Lextext());
+ 	    System.out.println();
+	   	}
+}
+}
+    
+    ]]>
+</programlisting>
         </para>
-        <para>
-            Megoldás forrása:                
+        
+        <para> Amiért mégpedig ez a rész fog felelni, mivel itt alakítja át string-é az átalakított karaktereket.
+            <programlisting>
+    <![CDATA[
+                
+
+
+		}
+		newtext=sb.toString();
+		return newtext;
+		
+	}
+}
+    
+    ]]>
+</programlisting>
         </para>
+        
+
         <para>
-            Tanulságok, tapasztalatok, magyarázat...
+            A program futása:
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/leet.png" scale="70" />
+                </imageobject>
+            </mediaobject>
+        </para>
+        
+        <para>
+            Majd második futtatásra látszodik, hogy a programunk jól működik és tényleg random használ fel karaktereket a lexer osztályból
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/leet2.png" scale="70" />
+                </imageobject>
+            </mediaobject>
         </para>
     </section> 
 <section>
@@ -95,14 +344,54 @@ Lásd https://youtu.be/XpBnR31BRJY
         <para>
             Megoldás forrása:                
         </para>
-        <para>
-            
-	Ebben a feladatban is a mandelbrot programunkat fogjuk használni mivel közel összeköttetésben van a két program. Egy kétdimenziós képet fogunk legenerálni, aminek PNG formátuma lesz. A program futása előtt le kell töltenünk plusz tartozékokat, mint például a libpng-t, igy müködni fog a kép generálás. Majd futtatjuk a programot, és legeneráluk a képünket. A kapott kepünket fogjuk később felhasználni. A perceptron osztály headerjeben alkalmunk adódik megadni a rétegek, és neuronok számát is. Az előbb generáált képet most beimportáljuk, és a piros részeket a legoflalt tárba másoljuk be, majd új képet állítunk elő aminek a magassága és a szélessége megfog felelni az előző képhez, és az innen visszakapott értéket kék értékként fogjuk hasaználni. 
-
-
-
-
-</para>
+        <para> Ebben a feladatban is a mandelbrot programunkat fogjuk használni mivel közel
+            összeköttetésben van a két program. Egy kétdimenziós képet fogunk legenerálni, aminek
+            PNG formátuma lesz. A program futása előtt le kell töltenünk plusz tartozékokat, mint
+            például a libpng-t, igy müködni fog a kép generálás. Majd futtatjuk a programot, és
+            legeneráluk a képünket. </para>
+        <para>A kapott kepünket fogjuk később felhasználni. A perceptron osztály headerjeben
+            alkalmunk adódik megadni a rétegek, és neuronok számát is. </para>
+    
+    <para>
+        
+    <programlisting>
+        
+        <![CDATA[
+int main(int argc, char ++argv){
+png::image <png::rgb_pixel> png_image(argv[1]);
+int size = png_image.get_width()*png_image.get_height();
+Perceptron *p = new Perceptron(3, size, 256, 1);
+]]>
+    </programlisting>
+        
+    </para>
+        <para>Az előbb generáált képet most beimportáljuk, és a piros részeket a legoflalt tárba
+            másoljuk be, majd új képet állítunk elő aminek a magassága és a szélessége megfog
+            felelni az előző képhez, és az innen visszakapott értéket kék értékként fogjuk
+            hasaználni. </para>
+    <para>
+    <programlisting>
+        <![CDATA[
+        double* image = new double[size];
+        
+for(int i = 0; i<png_image.get_width(); ++i)
+	for(int j = 0; i<png_image.get_height(); ++j)
+	image[i*png_image.get_width()+j] = png_image[i][j].red;
+double value = (*p) (image);
+cout << value << endl;
+]]>
+    </programlisting>
+    </para>
+    <para>
+        A végén pedig a delete-el felszabadítjuk a számunkra szükséges helyet a memóriában.
+        
+        <programlisting>
+            <![CDATA[
+delete p;
+delete [] image;
+]]>
+        </programlisting>
+    </para>
     </section>       
         
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
